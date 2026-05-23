@@ -9,6 +9,10 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { CartProvider } from "@/components/cart-context";
+import { CartDrawer } from "@/components/CartDrawer";
 
 function NotFoundComponent() {
   return (
@@ -133,7 +137,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
+      <CartProvider>
+        <Header />
+        <main className="min-h-screen">
+          <Outlet />
+        </main>
+        <Footer />
+        <CartDrawer />
+      </CartProvider>
     </QueryClientProvider>
   );
 }
