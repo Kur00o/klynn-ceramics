@@ -9,38 +9,175 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PlatesRouteImport } from './routes/plates'
+import { Route as MugsRouteImport } from './routes/mugs'
+import { Route as GiftingSetsRouteImport } from './routes/gifting-sets'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ChinaSetsRouteImport } from './routes/china-sets'
+import { Route as BowlsRouteImport } from './routes/bowls'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 
+const PlatesRoute = PlatesRouteImport.update({
+  id: '/plates',
+  path: '/plates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MugsRoute = MugsRouteImport.update({
+  id: '/mugs',
+  path: '/mugs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GiftingSetsRoute = GiftingSetsRouteImport.update({
+  id: '/gifting-sets',
+  path: '/gifting-sets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChinaSetsRoute = ChinaSetsRouteImport.update({
+  id: '/china-sets',
+  path: '/china-sets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BowlsRoute = BowlsRouteImport.update({
+  id: '/bowls',
+  path: '/bowls',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductSlugRoute = ProductSlugRouteImport.update({
+  id: '/product/$slug',
+  path: '/product/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bowls': typeof BowlsRoute
+  '/china-sets': typeof ChinaSetsRoute
+  '/contact': typeof ContactRoute
+  '/gifting-sets': typeof GiftingSetsRoute
+  '/mugs': typeof MugsRoute
+  '/plates': typeof PlatesRoute
+  '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bowls': typeof BowlsRoute
+  '/china-sets': typeof ChinaSetsRoute
+  '/contact': typeof ContactRoute
+  '/gifting-sets': typeof GiftingSetsRoute
+  '/mugs': typeof MugsRoute
+  '/plates': typeof PlatesRoute
+  '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bowls': typeof BowlsRoute
+  '/china-sets': typeof ChinaSetsRoute
+  '/contact': typeof ContactRoute
+  '/gifting-sets': typeof GiftingSetsRoute
+  '/mugs': typeof MugsRoute
+  '/plates': typeof PlatesRoute
+  '/product/$slug': typeof ProductSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/bowls'
+    | '/china-sets'
+    | '/contact'
+    | '/gifting-sets'
+    | '/mugs'
+    | '/plates'
+    | '/product/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/bowls'
+    | '/china-sets'
+    | '/contact'
+    | '/gifting-sets'
+    | '/mugs'
+    | '/plates'
+    | '/product/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/bowls'
+    | '/china-sets'
+    | '/contact'
+    | '/gifting-sets'
+    | '/mugs'
+    | '/plates'
+    | '/product/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BowlsRoute: typeof BowlsRoute
+  ChinaSetsRoute: typeof ChinaSetsRoute
+  ContactRoute: typeof ContactRoute
+  GiftingSetsRoute: typeof GiftingSetsRoute
+  MugsRoute: typeof MugsRoute
+  PlatesRoute: typeof PlatesRoute
+  ProductSlugRoute: typeof ProductSlugRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/plates': {
+      id: '/plates'
+      path: '/plates'
+      fullPath: '/plates'
+      preLoaderRoute: typeof PlatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mugs': {
+      id: '/mugs'
+      path: '/mugs'
+      fullPath: '/mugs'
+      preLoaderRoute: typeof MugsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gifting-sets': {
+      id: '/gifting-sets'
+      path: '/gifting-sets'
+      fullPath: '/gifting-sets'
+      preLoaderRoute: typeof GiftingSetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/china-sets': {
+      id: '/china-sets'
+      path: '/china-sets'
+      fullPath: '/china-sets'
+      preLoaderRoute: typeof ChinaSetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bowls': {
+      id: '/bowls'
+      path: '/bowls'
+      fullPath: '/bowls'
+      preLoaderRoute: typeof BowlsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +185,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/$slug': {
+      id: '/product/$slug'
+      path: '/product/$slug'
+      fullPath: '/product/$slug'
+      preLoaderRoute: typeof ProductSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BowlsRoute: BowlsRoute,
+  ChinaSetsRoute: ChinaSetsRoute,
+  ContactRoute: ContactRoute,
+  GiftingSetsRoute: GiftingSetsRoute,
+  MugsRoute: MugsRoute,
+  PlatesRoute: PlatesRoute,
+  ProductSlugRoute: ProductSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
