@@ -1,10 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build",
+  "buildCommand": "vite build && node scripts/prepare-dist.mjs && node scripts/verify-vercel-output.mjs",
   "installCommand": "npm install",
-  "outputDirectory": "dist",
-  "rewrites": [
-    { "source": "/assets/(.*)", "destination": "/assets/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ]
+  "outputDirectory": "dist"
 }

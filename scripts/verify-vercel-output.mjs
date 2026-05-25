@@ -13,10 +13,16 @@ if (!existsSync(configPath) || !existsSync(serverPath)) {
 }
 
 const distIndex = "dist/index.html";
+const distBowls = "dist/bowls/index.html";
+
 if (!existsSync(distIndex)) {
-  console.error("\n[build] Missing dist/index.html — prepare-dist step did not run.\n");
+  console.error("\n[build] Missing dist/index.html — prepare-dist did not run.\n");
+  process.exit(1);
+}
+if (!existsSync(distBowls)) {
+  console.error("\n[build] Missing dist/bowls/index.html — static prerender incomplete.\n");
   process.exit(1);
 }
 
 console.log("[build] Vercel output OK:", configPath);
-console.log("[build] dist/index.html OK");
+console.log("[build] dist/ static site OK (index.html + route folders)");
