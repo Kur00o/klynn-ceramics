@@ -7,17 +7,14 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 import { nitro } from "nitro/vite";
 
-const isVercel = process.env.VERCEL === "1";
-
 // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-// @cloudflare/vite-plugin builds from this — wrangler.jsonc main alone is insufficient.
-// On Vercel: disable Cloudflare plugin and use Nitro's vercel preset (Build Output API).
+// Cloudflare is disabled for production builds — it outputs Workers artifacts that prevent
+// Vercel from using Nitro's .vercel/output (Build Output API). Lovable deploys may not set VERCEL=1.
 export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
   },
-  // Cloudflare worker output conflicts with Vercel's .vercel/output when both run on build.
-  cloudflare: isVercel ? false : undefined,
+  cloudflare: false,
   plugins: [
     nitro({
       preset: "vercel",
