@@ -4,7 +4,7 @@ import { CategoryPage } from "@/components/CategoryPage";
 export const Route = createFileRoute("/plates")({
   head: () => ({
     meta: [
-      { title: "Plates — Terra Studio" },
+      { title: "Plates | Klynn Ceramics" },
       { name: "description", content: "Stoneware plates with softly rounded rims and matte glazes." },
     ],
   }),

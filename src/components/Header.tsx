@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, ShoppingBag, X } from "lucide-react";
 import { useCart } from "./cart-context";
@@ -18,6 +18,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { count, setOpen: setCartOpen } = useCart();
+  const location = useLocation();
 
   useEffect(() => {
     let last = typeof window !== "undefined" ? window.scrollY : 0;
@@ -32,6 +33,9 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const isDarkHeroPage = location.pathname === "/" || location.pathname === "/china-sets";
+  const isLight = isDarkHeroPage && !scrolled;
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
@@ -39,8 +43,13 @@ export function Header() {
       } ${scrolled ? "bg-background/85 backdrop-blur-md border-b border-border/60" : "bg-transparent"}`}
     >
       <div className="container-editorial flex items-center justify-between h-16 md:h-20">
-        <Link to="/" className="serif text-xl md:text-2xl tracking-tight text-foreground">
-          Terra<span className="text-primary">.</span>
+        <Link
+          to="/"
+          className={`serif text-xl md:text-2xl tracking-tight transition-colors duration-300 ${
+            isLight ? "text-parchment" : "text-foreground"
+          }`}
+        >
+          Klynn<span className="text-primary">.</span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-9">
@@ -50,7 +59,9 @@ export function Header() {
               to={n.to}
               activeOptions={{ exact: n.to === "/" }}
               activeProps={{ className: "text-primary" }}
-              className="text-[0.78rem] tracking-[0.22em] uppercase text-foreground/80 hover:text-primary transition-colors"
+              className={`text-[0.78rem] tracking-[0.22em] uppercase transition-colors duration-300 ${
+                isLight ? "text-parchment/80 hover:text-parchment" : "text-foreground/80 hover:text-primary"
+              }`}
             >
               {n.label}
             </Link>
@@ -61,7 +72,9 @@ export function Header() {
           <button
             onClick={() => setCartOpen(true)}
             aria-label="Open cart"
-            className="relative inline-flex items-center justify-center text-foreground hover:text-primary transition-colors"
+            className={`relative inline-flex items-center justify-center transition-colors duration-300 ${
+              isLight ? "text-parchment hover:text-parchment/80" : "text-foreground hover:text-primary"
+            }`}
           >
             <ShoppingBag className="w-5 h-5" strokeWidth={1.4} />
             {count > 0 && (
@@ -73,7 +86,9 @@ export function Header() {
           <button
             onClick={() => setOpen(true)}
             aria-label="Open menu"
-            className="lg:hidden text-foreground"
+            className={`lg:hidden transition-colors duration-300 ${
+              isLight ? "text-parchment hover:text-parchment/80" : "text-foreground hover:text-primary"
+            }`}
           >
             <Menu className="w-5 h-5" strokeWidth={1.4} />
           </button>
@@ -84,7 +99,7 @@ export function Header() {
         <div className="fixed inset-0 z-50 bg-background fade-in lg:hidden">
           <div className="container-editorial flex items-center justify-between h-16">
             <Link to="/" onClick={() => setOpen(false)} className="serif text-xl">
-              Terra<span className="text-primary">.</span>
+              Klynn<span className="text-primary">.</span>
             </Link>
             <button onClick={() => setOpen(false)} aria-label="Close menu">
               <X className="w-5 h-5" strokeWidth={1.4} />

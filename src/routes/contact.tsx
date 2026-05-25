@@ -4,7 +4,7 @@ import { useState } from "react";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Terra Studio" },
+      { title: "Contact | Klynn Ceramics" },
       { name: "description", content: "Visit the studio, place a trade enquiry, or simply say hello." },
     ],
   }),
@@ -37,15 +37,15 @@ function Contact() {
           <div>
             <p className="eyebrow mb-3">Get in touch</p>
             <p className="text-lg leading-relaxed">
-              <a href="mailto:hello@terra.studio" className="link-underline">hello@terra.studio</a><br />
+              <a href="mailto:hello@klynnceramics.com" className="link-underline">hello@klynnceramics.com</a><br />
               <a href="tel:+61200000000" className="link-underline">+61 2 0000 0000</a>
             </p>
           </div>
           <div>
             <p className="eyebrow mb-3">Visiting hours</p>
             <p className="text-lg leading-relaxed">
-              Wednesday — Saturday<br />
-              <span className="text-muted-foreground">10am — 4pm, by appointment</span>
+              Wednesday to Saturday<br />
+              <span className="text-muted-foreground">10am to 4pm, by appointment</span>
             </p>
           </div>
         </div>
@@ -70,7 +70,7 @@ function Contact() {
             <label className="eyebrow mb-2 block">Message</label>
             <textarea rows={5} className="w-full bg-transparent border-b border-border focus:border-primary py-3 text-base outline-none resize-none transition-colors" placeholder="Tell us a little about it…" />
           </div>
-          <button className="btn-primary" type="submit">{sent ? "Thank you — we'll be in touch" : "Send message"}</button>
+          <button className="btn-primary" type="submit">{sent ? "Thank you, we'll be in touch" : "Send message"}</button>
         </form>
       </div>
     </div>

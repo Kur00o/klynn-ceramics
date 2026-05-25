@@ -21,10 +21,10 @@ export function ProductCard({ p, eager = false }: { p: Product; eager?: boolean 
           </span>
         )}
       </div>
-      <div className="pt-5 pb-2 flex items-baseline justify-between gap-4">
+      <div className="pt-2 pb-0 flex items-baseline justify-between gap-4">
         <div>
           <h3 className="serif text-xl leading-tight">{p.name}</h3>
-          <p className="text-xs text-muted-foreground mt-1">{p.descriptor}</p>
+          <p className="text-xs text-muted-foreground mt-0.5">{p.descriptor}</p>
         </div>
         <p className="text-sm tabular-nums">${p.price}</p>
       </div>

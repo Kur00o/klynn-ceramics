@@ -5,7 +5,7 @@ import catGifting from "@/assets/cat-gifting.jpg";
 export const Route = createFileRoute("/gifting-sets")({
   head: () => ({
     meta: [
-      { title: "Gifting Sets — Terra Studio" },
+      { title: "Gifting Sets | Klynn Ceramics" },
       { name: "description", content: "Curated gifting sets, hand-wrapped in raw linen and twine." },
       { property: "og:image", content: catGifting },
     ],
@@ -44,7 +44,7 @@ function GiftingPage() {
                 <img src={p.image} alt={p.alt} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] hover:scale-105" />
               </Link>
               <div className="md:[direction:ltr]">
-                <p className="eyebrow">Set No. {String(i + 1).padStart(2, "0")}</p>
+                <p className="eyebrow">Set {String(i + 1).padStart(2, "0")}</p>
                 <h2 className="serif text-4xl md:text-5xl mt-4">{p.name}</h2>
                 <p className="text-muted-foreground mt-4">{p.descriptor}</p>
                 <p className="mt-6 leading-relaxed text-foreground/90 max-w-md">

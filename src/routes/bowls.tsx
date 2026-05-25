@@ -4,9 +4,9 @@ import { CategoryPage } from "@/components/CategoryPage";
 export const Route = createFileRoute("/bowls")({
   head: () => ({
     meta: [
-      { title: "Bowls — Terra Studio" },
-      { name: "description", content: "Hand-thrown stoneware bowls — for breakfast, for feasts, for everyday." },
-      { property: "og:title", content: "Bowls — Terra Studio" },
+      { title: "Bowls | Klynn Ceramics" },
+      { name: "description", content: "Hand-thrown stoneware bowls, crafted for breakfast, feasts, or everyday use." },
+      { property: "og:title", content: "Bowls | Klynn Ceramics" },
     ],
   }),
   component: () => (

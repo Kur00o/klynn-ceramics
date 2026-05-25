@@ -33,7 +33,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --color-clay: var(--clay);
+  --color-forest: var(--forest);
   --color-sand: var(--sand);
   --color-parchment: var(--parchment);
   --color-charcoal: var(--charcoal);
@@ -44,48 +44,48 @@
 :root {
   --radius: 0.125rem;
 
-  /* Brand earthy palette in oklch */
-  --parchment: oklch(0.965 0.012 80);    /* #F5F0E8 */
-  --sand: oklch(0.905 0.025 80);         /* #E8DECA */
-  --stone: oklch(0.84 0.018 75);         /* warm light stone */
-  --clay: oklch(0.46 0.105 45);          /* deep terracotta #8B4A2F */
-  --charcoal: oklch(0.245 0.022 55);     /* charcoal brown #2C2017 */
-  --sage: oklch(0.6 0.04 140);           /* muted sage */
+  /* Brand earthy palette in oklch - Eucalyptus & Moss Theme */
+  --parchment: oklch(0.975 0.008 120);   /* soft off-white with green undertone */
+  --sand: oklch(0.915 0.016 110);        /* light earthy green-beige */
+  --stone: oklch(0.85 0.012 130);        /* premium warm grey stone */
+  --forest: oklch(0.35 0.045 140);       /* premium deep forest green */
+  --charcoal: oklch(0.20 0.012 140);     /* forest black / very dark pine green */
+  --sage: oklch(0.62 0.045 140);         /* elegant muted sage */
 
   --background: var(--parchment);
   --foreground: var(--charcoal);
-  --card: oklch(0.985 0.008 80);
+  --card: oklch(0.985 0.006 120);
   --card-foreground: var(--charcoal);
   --popover: var(--parchment);
   --popover-foreground: var(--charcoal);
-  --primary: var(--clay);
+  --primary: var(--forest);
   --primary-foreground: var(--parchment);
   --secondary: var(--sand);
   --secondary-foreground: var(--charcoal);
-  --muted: oklch(0.92 0.018 80);
-  --muted-foreground: oklch(0.42 0.025 55);
+  --muted: oklch(0.935 0.01 120);
+  --muted-foreground: oklch(0.45 0.015 140);
   --accent: var(--sage);
   --accent-foreground: var(--parchment);
   --destructive: oklch(0.5 0.15 30);
   --destructive-foreground: var(--parchment);
-  --border: oklch(0.86 0.02 75);
-  --input: oklch(0.86 0.02 75);
-  --ring: var(--clay);
+  --border: oklch(0.87 0.01 120);
+  --input: oklch(0.87 0.01 120);
+  --ring: var(--forest);
 }
 
 .dark {
   --background: var(--charcoal);
   --foreground: var(--parchment);
-  --card: oklch(0.3 0.022 55);
+  --card: oklch(0.24 0.014 140);
   --card-foreground: var(--parchment);
-  --popover: oklch(0.3 0.022 55);
+  --popover: oklch(0.24 0.014 140);
   --popover-foreground: var(--parchment);
   --primary: var(--sand);
   --primary-foreground: var(--charcoal);
-  --secondary: oklch(0.35 0.025 55);
+  --secondary: oklch(0.28 0.014 140);
   --secondary-foreground: var(--parchment);
-  --muted: oklch(0.32 0.02 55);
-  --muted-foreground: oklch(0.75 0.02 75);
+  --muted: oklch(0.26 0.014 140);
+  --muted-foreground: oklch(0.75 0.012 140);
   --accent: var(--sage);
   --accent-foreground: var(--parchment);
   --border: oklch(1 0 0 / 12%);
@@ -138,7 +138,7 @@
     align-items: center;
     justify-content: center;
     padding: 0.95rem 2rem;
-    background: var(--clay);
+    background: var(--forest);
     color: var(--parchment);
     font-size: 0.78rem;
     letter-spacing: 0.22em;

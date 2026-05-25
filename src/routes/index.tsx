@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowDown, ArrowRight } from "lucide-react";
-import hero from "@/assets/hero.jpg";
+import hero from "@/assets/hero.png";
 import process from "@/assets/process.jpg";
 import ugc1 from "@/assets/ugc1.jpg";
 import ugc2 from "@/assets/ugc2.jpg";
@@ -11,9 +11,9 @@ import { ProductCard } from "@/components/ProductCard";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Terra Studio — Handcrafted Ceramics" },
+      { title: "Klynn Ceramics: Handcrafted Ceramics" },
       { name: "description", content: "Handcrafted ceramics designed for everyday rituals. Bowls, plates, mugs and china sets, made slowly from raw earth." },
-      { property: "og:title", content: "Terra Studio — Handcrafted Ceramics" },
+      { property: "og:title", content: "Klynn Ceramics: Handcrafted Ceramics" },
       { property: "og:description", content: "Handcrafted ceramics for everyday rituals." },
       { property: "og:image", content: hero },
     ],
@@ -35,17 +35,17 @@ function Home() {
           fetchPriority="high"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-charcoal/15 via-transparent to-charcoal/45" />
+        <div className="absolute inset-0 bg-charcoal/40 bg-gradient-to-b from-charcoal/30 via-transparent to-charcoal/70" />
         <div className="relative z-10 h-full container-editorial flex flex-col justify-end pb-20 md:pb-28">
           <div className="max-w-3xl fade-in">
-            <p className="eyebrow text-parchment/85">Studio Terra · Est. 2014</p>
+            <p className="eyebrow text-parchment/85">Klynn Ceramics · Est. 2014</p>
             <h1 className="serif text-parchment mt-6 text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[0.98]">
               Crafted from Earth.
               <br />
               <em className="font-normal italic opacity-90">Made to last.</em>
             </h1>
             <p className="mt-7 max-w-xl text-parchment/85 text-base md:text-lg leading-relaxed">
-              Stoneware shaped slowly, by hand, in small kilns. Each piece is unique —
+              Stoneware shaped slowly, by hand, in small kilns. Each piece is unique,
               designed for everyday rituals that deserve a little beauty.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
@@ -65,7 +65,7 @@ function Home() {
       <section className="container-editorial pt-28 md:pt-36">
         <div className="flex items-end justify-between mb-14 flex-wrap gap-6">
           <div>
-            <p className="eyebrow">No. 01 / Featured</p>
+            <p className="eyebrow">Featured</p>
             <h2 className="serif text-4xl md:text-6xl mt-3">A small, considered edit.</h2>
           </div>
           <Link to="/bowls" className="link-underline text-[0.78rem] tracking-[0.22em] uppercase">
@@ -92,9 +92,9 @@ function Home() {
       {/* PHILOSOPHY */}
       <section id="story" className="mt-32 md:mt-44 bg-secondary py-28 md:py-40">
         <div className="container-editorial max-w-4xl text-center">
-          <p className="eyebrow">No. 02 / Philosophy</p>
+          <p className="eyebrow">Philosophy</p>
           <blockquote className="serif italic text-3xl md:text-5xl leading-[1.15] mt-8">
-            "We make slowly, on purpose. Clay remembers the hand that shaped it —
+            "We make slowly, on purpose. Clay remembers the hand that shaped it,
             and a quiet table holds more than dinner."
           </blockquote>
           <p className="mt-10 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -106,7 +106,7 @@ function Home() {
 
       {/* CATEGORY TILES */}
       <section className="container-editorial mt-32 md:mt-44">
-        <p className="eyebrow">No. 03 / Collections</p>
+        <p className="eyebrow">Collections</p>
         <h2 className="serif text-4xl md:text-6xl mt-3 mb-14">The whole table.</h2>
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-5">
           {(["bowls","plates","mugs","gifting","china"] as const).map((k) => {
@@ -129,7 +129,7 @@ function Home() {
       <section className="mt-32 md:mt-44">
         <div className="container-editorial flex items-end justify-between mb-10">
           <div>
-            <p className="eyebrow">No. 04 / Bestsellers</p>
+            <p className="eyebrow">Bestsellers</p>
             <h2 className="serif text-4xl md:text-6xl mt-3">Lived with, loved daily.</h2>
           </div>
         </div>
@@ -160,12 +160,12 @@ function Home() {
           <img src={process} alt="Hands shaping wet clay on a potter's wheel" loading="lazy" className="w-full h-full object-cover" />
         </div>
         <div className="md:pr-10">
-          <p className="eyebrow">No. 06 / Material</p>
+          <p className="eyebrow">Material</p>
           <h2 className="serif text-4xl md:text-6xl mt-3 leading-[1.05]">A material with memory.</h2>
           <p className="mt-7 text-muted-foreground leading-relaxed">
             Our clay comes from a single quarry in the hills outside the studio. We blend it with grog and
-            kaolin, age the body for weeks, and finish each piece by hand. The variations you see — a softer
-            edge, a richer pool of glaze — are the language of the kiln.
+            kaolin, age the body for weeks, and finish each piece by hand. The variations you see, like a softer
+            edge or a richer pool of glaze, are the language of the kiln.
           </p>
           <p className="mt-5 text-muted-foreground leading-relaxed">
             We fire to stoneware temperatures so every piece is dishwasher safe and built to outlast trends.
@@ -180,10 +180,10 @@ function Home() {
       <section className="container-editorial mt-32 md:mt-44">
         <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
           <div>
-            <p className="eyebrow">No. 07 / At Home</p>
+            <p className="eyebrow">At Home</p>
             <h2 className="serif text-4xl md:text-6xl mt-3">In real rooms, real lives.</h2>
           </div>
-          <span className="text-sm text-muted-foreground">@studio.terra</span>
+          <span className="text-sm text-muted-foreground">@klynn.ceramics</span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
           {[ugc1, ugc2, ugc3, ugc1, ugc3, ugc2].map((src, i) => (
@@ -197,7 +197,7 @@ function Home() {
       {/* EMAIL CAPTURE */}
       <section className="mt-32 md:mt-44 bg-charcoal text-parchment py-24">
         <div className="container-editorial max-w-3xl text-center">
-          <p className="eyebrow text-parchment/70">No. 08 / Quiet drops</p>
+          <p className="eyebrow text-parchment/70">Quiet drops</p>
           <h2 className="serif text-4xl md:text-5xl mt-4">Join the waitlist for new drops.</h2>
           <p className="mt-5 text-parchment/70">Small batches. Sent only when there's something worth sending.</p>
           <form className="mt-10 flex max-w-md mx-auto border-b border-parchment/40 focus-within:border-parchment transition-colors">

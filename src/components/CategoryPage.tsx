@@ -32,7 +32,7 @@ export function CategoryPage({
       {hero && (
         <div className="relative h-[55vh] min-h-[380px] w-full overflow-hidden mb-20">
           <img src={hero} alt={title} className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-charcoal/20" />
+          <div className="absolute inset-0 bg-charcoal/40 bg-gradient-to-b from-charcoal/20 via-transparent to-charcoal/70" />
           <div className="absolute inset-0 flex items-end">
             <div className="container-editorial pb-12">
               <p className="eyebrow text-parchment/80">Collection</p>

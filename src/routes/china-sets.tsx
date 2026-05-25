@@ -7,7 +7,7 @@ import catChina from "@/assets/cat-china.jpg";
 export const Route = createFileRoute("/china-sets")({
   head: () => ({
     meta: [
-      { title: "China Sets — Terra Studio" },
+      { title: "China Sets | Klynn Ceramics" },
       { name: "description", content: "Complete china sets in considered earth tones. Service for 4, 6, or 8." },
       { property: "og:image", content: catChina },
     ],
@@ -26,7 +26,7 @@ function ChinaPage() {
     <div className="pt-20 md:pt-24">
       <div className="relative h-[70vh] min-h-[440px] w-full overflow-hidden">
         <img src={catChina} alt="China set table flat-lay" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-charcoal/30" />
+        <div className="absolute inset-0 bg-charcoal/40 bg-gradient-to-b from-charcoal/20 via-transparent to-charcoal/70" />
         <div className="absolute inset-0 flex items-end">
           <div className="container-editorial pb-16">
             <p className="eyebrow text-parchment/85">Heirloom Sets</p>

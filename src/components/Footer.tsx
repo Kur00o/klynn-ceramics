@@ -7,10 +7,10 @@ export function Footer() {
       <div className="container-editorial py-20 grid gap-12 md:grid-cols-4">
         <div>
           <Link to="/" className="serif text-2xl">
-            Terra<span className="text-primary">.</span>
+            Klynn<span className="text-primary">.</span>
           </Link>
           <p className="mt-5 text-sm text-muted-foreground leading-relaxed max-w-xs">
-            Ceramics shaped slowly, by hand, from raw earth — for tables that hold a moment.
+            Ceramics shaped slowly, by hand, from raw earth, made for tables that hold a moment.
           </p>
         </div>
         <div>
@@ -54,7 +54,7 @@ export function Footer() {
       </div>
       <div className="border-t border-border">
         <div className="container-editorial py-6 flex flex-wrap items-center justify-between gap-3 text-xs text-muted-foreground">
-          <span>© {new Date().getFullYear()} Terra Studio. Made slowly.</span>
+          <span>© {new Date().getFullYear()} Klynn Ceramics. Made slowly.</span>
           <span>Stoneware, dust and patience.</span>
         </div>
       </div>

@@ -76,14 +76,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Terra Studio — Handcrafted Ceramics" },
+      { title: "Klynn Ceramics: Handcrafted Ceramics" },
       {
         name: "description",
         content:
           "Handcrafted ceramics designed for everyday rituals. Bowls, plates, mugs and china sets, made slowly from raw earth.",
       },
-      { name: "author", content: "Terra Studio" },
-      { property: "og:title", content: "Terra Studio — Handcrafted Ceramics" },
+      { name: "author", content: "Klynn Ceramics" },
+      { property: "og:title", content: "Klynn Ceramics: Handcrafted Ceramics" },
       {
         property: "og:description",
         content: "Handcrafted ceramics designed for everyday rituals.",

@@ -12,9 +12,9 @@ export const Route = createFileRoute("/product/$slug")({
   },
   head: ({ loaderData }) => ({
     meta: loaderData ? [
-      { title: `${loaderData.name} — Terra Studio` },
+      { title: `${loaderData.name} | Klynn Ceramics` },
       { name: "description", content: loaderData.descriptor },
-      { property: "og:title", content: `${loaderData.name} — Terra Studio` },
+      { property: "og:title", content: `${loaderData.name} | Klynn Ceramics` },
       { property: "og:image", content: loaderData.image },
     ] : [],
   }),
@@ -69,7 +69,7 @@ function PDP() {
               ))}
             </div>
             <div className="mt-5 text-sm leading-relaxed text-foreground/90 min-h-[6rem]">
-              {tab === "desc" && (p.description ?? "A piece from the Terra collection. Hand-thrown, glazed in studio, fired slowly.")}
+              {tab === "desc" && (p.description ?? "A piece from the Klynn collection. Hand-thrown, glazed in our studio, and fired slowly.")}
               {tab === "materials" && (p.materials ?? "Local stoneware clay, lead-free matte glaze.")}
               {tab === "care" && (p.care ?? "Dishwasher safe. Avoid sudden temperature changes.")}
             </div>
