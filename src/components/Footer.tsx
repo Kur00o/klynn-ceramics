@@ -6,8 +6,8 @@ export function Footer() {
     <footer className="mt-32 border-t border-border bg-secondary/40">
       <div className="container-editorial py-20 grid gap-12 md:grid-cols-4">
         <div>
-          <Link to="/" className="serif text-2xl">
-            Klynn<span className="text-primary">.</span>
+          <Link to="/" className="flex items-center">
+            <img src="/logo.png" alt="Klynn" className="h-8 md:h-10 w-auto object-contain" />
           </Link>
           <p className="mt-5 text-sm text-muted-foreground leading-relaxed max-w-xs">
             Ceramics shaped slowly, by hand, from raw earth, made for tables that hold a moment.

@@ -45,11 +45,11 @@ export function Header() {
       <div className="container-editorial flex items-center justify-between h-16 md:h-20">
         <Link
           to="/"
-          className={`serif text-xl md:text-2xl tracking-tight transition-colors duration-300 ${
-            isLight ? "text-parchment" : "text-foreground"
+          className={`transition-all duration-300 flex items-center ${
+            isLight ? "brightness-0 invert opacity-90" : "opacity-100"
           }`}
         >
-          Klynn<span className="text-primary">.</span>
+          <img src="/logo.png" alt="Klynn" className="h-7 md:h-8 w-auto object-contain" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-9">
@@ -98,8 +98,8 @@ export function Header() {
       {open && (
         <div className="fixed inset-0 z-50 bg-background fade-in lg:hidden">
           <div className="container-editorial flex items-center justify-between h-16">
-            <Link to="/" onClick={() => setOpen(false)} className="serif text-xl">
-              Klynn<span className="text-primary">.</span>
+            <Link to="/" onClick={() => setOpen(false)} className="flex items-center">
+              <img src="/logo.png" alt="Klynn" className="h-7 w-auto object-contain" />
             </Link>
             <button onClick={() => setOpen(false)} aria-label="Close menu">
               <X className="w-5 h-5" strokeWidth={1.4} />
