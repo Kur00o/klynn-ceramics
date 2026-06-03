@@ -128,6 +128,13 @@ export const createCartMutation = `
                   product {
                     title
                     handle
+                    images(first: 1) {
+                      edges {
+                        node {
+                          url
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -167,6 +174,13 @@ export const addToCartMutation = `
                   product {
                     title
                     handle
+                    images(first: 1) {
+                      edges {
+                        node {
+                          url
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -206,6 +220,13 @@ export const updateCartLinesMutation = `
                   product {
                     title
                     handle
+                    images(first: 1) {
+                      edges {
+                        node {
+                          url
+                        }
+                      }
+                    }
                   }
                 }
               }
@@ -245,6 +266,13 @@ export const removeFromCartMutation = `
                   product {
                     title
                     handle
+                    images(first: 1) {
+                      edges {
+                        node {
+                          url
+                        }
+                      }
+                    }
                   }
                 }
               }
