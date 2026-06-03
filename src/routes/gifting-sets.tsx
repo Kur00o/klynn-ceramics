@@ -70,7 +70,7 @@ function GiftingPage() {
                     ))}
                   </div>
                   <div className="mt-10 flex items-center gap-8">
-                    <span className="serif text-3xl">${p.price}</span>
+                    <span className="serif text-3xl">₹{p.price}</span>
                     <Link to="/product/$slug" params={{ slug: p.slug }} className="btn-primary">View set</Link>
                   </div>
                 </div>

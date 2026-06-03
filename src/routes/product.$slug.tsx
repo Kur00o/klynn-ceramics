@@ -58,7 +58,7 @@ function PDP() {
           <p className="eyebrow">{p.category}</p>
           <h1 className="serif text-4xl md:text-6xl mt-4 leading-[1.05]">{p.name}</h1>
           <p className="text-muted-foreground mt-3">{p.descriptor}</p>
-          <p className="serif text-3xl mt-8">${p.price}</p>
+          <p className="serif text-3xl mt-8">₹{p.price}</p>
 
           <button onClick={() => add(p)} className="btn-primary mt-8 w-full md:w-auto">Add to cart</button>
 

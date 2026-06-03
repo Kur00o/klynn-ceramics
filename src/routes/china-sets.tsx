@@ -75,7 +75,7 @@ function ChinaPage() {
                     <h3 className="serif text-2xl">{p.name}</h3>
                     <p className="text-xs text-muted-foreground mt-1">Service for {size} · {size * 4} pieces</p>
                   </div>
-                  <p className="serif text-xl tabular-nums">${Math.round(p.price * factor)}</p>
+                  <p className="serif text-xl tabular-nums">₹{Math.round(p.price * factor)}</p>
                 </div>
               </article>
             ))

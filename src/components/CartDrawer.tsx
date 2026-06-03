@@ -40,7 +40,7 @@ export function CartDrawer() {
                     {isUpdating ? "Updating..." : "Remove"}
                   </button>
                 </div>
-                <p className="text-sm">${i.product.price * i.qty}</p>
+                <p className="text-sm">₹{i.product.price * i.qty}</p>
               </div>
             ))
           )}
@@ -49,7 +49,7 @@ export function CartDrawer() {
         <div className="absolute bottom-0 inset-x-0 border-t border-border p-6 bg-background">
           <div className="flex items-baseline justify-between mb-4">
             <span className="eyebrow">Subtotal</span>
-            <span className="serif text-2xl">${total}</span>
+            <span className="serif text-2xl">₹{total}</span>
           </div>
           {checkoutUrl ? (
             <a href={checkoutUrl} className="btn-primary w-full text-center block disabled:opacity-50" aria-disabled={items.length === 0}>

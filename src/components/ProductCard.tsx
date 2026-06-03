@@ -26,7 +26,7 @@ export function ProductCard({ p, eager = false }: { p: Product; eager?: boolean 
           <h3 className="serif text-xl leading-tight">{p.name}</h3>
           <p className="text-xs text-muted-foreground mt-0.5">{p.descriptor}</p>
         </div>
-        <p className="text-sm tabular-nums">${p.price}</p>
+        <p className="text-sm tabular-nums">₹{p.price}</p>
       </div>
     </Link>
   );
