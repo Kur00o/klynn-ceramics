@@ -33,7 +33,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const isDarkHeroPage = location.pathname === "/" || location.pathname === "/china-sets";
+  const isDarkHeroPage = location.pathname === "/";
   const isLight = isDarkHeroPage && !scrolled;
 
   return (
@@ -58,7 +58,7 @@ export function Header() {
               key={n.to}
               to={n.to}
               activeOptions={{ exact: n.to === "/" }}
-              activeProps={{ className: "text-primary" }}
+              activeProps={{ className: "text-primary underline underline-offset-[6px] decoration-[1.5px]" }}
               className={`text-[0.78rem] tracking-[0.22em] uppercase transition-colors duration-300 ${
                 isLight ? "text-parchment/80 hover:text-parchment" : "text-foreground/80 hover:text-primary"
               }`}
@@ -110,8 +110,10 @@ export function Header() {
               <Link
                 key={n.to}
                 to={n.to}
+                activeOptions={{ exact: n.to === "/" }}
+                activeProps={{ className: "text-primary underline underline-offset-[6px] decoration-[1.5px]" }}
                 onClick={() => setOpen(false)}
-                className="serif text-3xl text-foreground"
+                className="serif text-3xl text-foreground transition-colors"
               >
                 {n.label}
               </Link>
