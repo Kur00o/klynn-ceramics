@@ -69,7 +69,7 @@ function PDP() {
               ))}
             </div>
             <div className="mt-5 text-sm leading-relaxed text-foreground/90 min-h-[6rem]">
-              {tab === "desc" && (p.description ?? "A piece from the Klynn collection. Hand-thrown, glazed in our studio, and fired slowly.")}
+              {tab === "desc" && (p.description ?? "A piece from the Klynn collection. Hand-thrown, glazed by hand, and fired slowly.")}
               {tab === "materials" && (p.materials ?? "Local stoneware clay, lead-free matte glaze.")}
               {tab === "care" && (p.care ?? "Dishwasher safe. Avoid sudden temperature changes.")}
             </div>

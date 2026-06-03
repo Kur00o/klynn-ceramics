@@ -24,17 +24,16 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <p className="eyebrow mb-4">Studio</p>
+          <p className="eyebrow mb-4">Connect</p>
           <ul className="space-y-2.5 text-sm">
             <li><Link to="/contact" className="link-underline">Contact</Link></li>
-            <li><span className="text-muted-foreground">Visit by appointment</span></li>
             <li><span className="text-muted-foreground">Care &amp; Repair</span></li>
             <li><span className="text-muted-foreground">Trade enquiries</span></li>
           </ul>
         </div>
         <div>
           <p className="eyebrow mb-4">Newsletter</p>
-          <p className="text-sm text-muted-foreground mb-3">Quiet notes from the studio. New drops, no spam.</p>
+          <p className="text-sm text-muted-foreground mb-3">Quiet notes from us. New drops, no spam.</p>
           <form className="flex border-b border-foreground/40 focus-within:border-primary transition-colors">
             <input
               type="email"

@@ -38,11 +38,11 @@ function Home() {
         <div className="absolute inset-0 bg-charcoal/40 bg-gradient-to-b from-charcoal/30 via-transparent to-charcoal/70" />
         <div className="relative z-10 h-full container-editorial flex flex-col justify-end pb-20 md:pb-28">
           <div className="max-w-3xl fade-in">
-            <p className="eyebrow text-parchment/85">Klynn Ceramics · Est. 2014</p>
+            <p className="eyebrow text-parchment/85">Klynn Ceramics</p>
             <h1 className="serif text-parchment mt-6 text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[0.98]">
-              Crafted from Earth.
+              Born from clay.
               <br />
-              <em className="font-normal italic opacity-90">Made to last.</em>
+              <em className="font-normal italic opacity-90">Built for your table.</em>
             </h1>
             <p className="mt-7 max-w-xl text-parchment/85 text-base md:text-lg leading-relaxed">
               Stoneware shaped slowly, by hand, in small kilns. Each piece is unique,
@@ -99,7 +99,7 @@ function Home() {
           </blockquote>
           <p className="mt-10 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Every piece begins as raw clay from a single quarry, finished with lead-free glazes mixed
-            in our studio. Nothing is rushed. Nothing is mass-made. The dust on our hands is part of the work.
+            by hand. Nothing is rushed. Nothing is mass-made. The dust on our hands is part of the work.
           </p>
         </div>
       </section>
@@ -163,15 +163,15 @@ function Home() {
           <p className="eyebrow">Material</p>
           <h2 className="serif text-4xl md:text-6xl mt-3 leading-[1.05]">A material with memory.</h2>
           <p className="mt-7 text-muted-foreground leading-relaxed">
-            Our clay comes from a single quarry in the hills outside the studio. We blend it with grog and
-            kaolin, age the body for weeks, and finish each piece by hand. The variations you see, like a softer
-            edge or a richer pool of glaze, are the language of the kiln.
+            Our clay comes from a single quarry. We blend it with grog and
+            kaolin, age the body for weeks, and finish each piece by hand. The irregularities you see, like a softer
+            edge or a richer pool of glaze, are intentional—framing these handmade traits as a mark of true luxury and the language of the kiln.
           </p>
           <p className="mt-5 text-muted-foreground leading-relaxed">
-            We fire to stoneware temperatures so every piece is dishwasher safe and built to outlast trends.
+            We fire to stoneware temperatures, ensuring every piece is completely lead-free, food-safe, dishwasher-safe, and built to outlast trends.
           </p>
           <Link to="/contact" className="link-underline mt-10 inline-block text-[0.78rem] tracking-[0.22em] uppercase">
-            Visit the studio <ArrowRight className="inline w-3.5 h-3.5 ml-1" strokeWidth={1.4} />
+            Get in touch <ArrowRight className="inline w-3.5 h-3.5 ml-1" strokeWidth={1.4} />
           </Link>
         </div>
       </section>

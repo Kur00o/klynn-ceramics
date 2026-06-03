@@ -5,7 +5,7 @@ export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact | Klynn Ceramics" },
-      { name: "description", content: "Visit the studio, place a trade enquiry, or simply say hello." },
+      { name: "description", content: "Get in touch, place a trade enquiry, or simply say hello." },
     ],
   }),
   component: Contact,
@@ -16,10 +16,10 @@ function Contact() {
   return (
     <div className="pt-28 md:pt-36 container-editorial">
       <header className="max-w-2xl mb-16 fade-in">
-        <p className="eyebrow">Studio</p>
-        <h1 className="serif text-5xl md:text-7xl mt-4">Come find us.</h1>
+        <p className="eyebrow">Contact</p>
+        <h1 className="serif text-5xl md:text-7xl mt-4">Get in touch.</h1>
         <p className="text-base md:text-lg text-muted-foreground mt-6 leading-relaxed">
-          The studio doors are open by appointment. Drop a note for trade enquiries, custom commissions,
+          Drop a note for trade enquiries, custom commissions,
           or simply to say hello.
         </p>
       </header>
@@ -27,7 +27,7 @@ function Contact() {
       <div className="grid md:grid-cols-2 gap-16 md:gap-24">
         <div className="space-y-10">
           <div>
-            <p className="eyebrow mb-3">Studio</p>
+            <p className="eyebrow mb-3">Location</p>
             <p className="text-lg leading-relaxed">
               14 Kiln Lane<br />
               Bywater, NSW 2480<br />
@@ -41,13 +41,7 @@ function Contact() {
               <a href="tel:+61200000000" className="link-underline">+61 2 0000 0000</a>
             </p>
           </div>
-          <div>
-            <p className="eyebrow mb-3">Visiting hours</p>
-            <p className="text-lg leading-relaxed">
-              Wednesday to Saturday<br />
-              <span className="text-muted-foreground">10am to 4pm, by appointment</span>
-            </p>
-          </div>
+
         </div>
 
         <form
@@ -62,7 +56,6 @@ function Contact() {
               <option>General enquiry</option>
               <option>Trade &amp; wholesale</option>
               <option>Custom commission</option>
-              <option>Studio visit</option>
               <option>Press</option>
             </select>
           </div>
