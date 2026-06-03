@@ -38,7 +38,12 @@ function PDP() {
   return (
     <div className="pt-28 md:pt-36">
       <div className="container-editorial">
-        <Link to="/" className="text-[0.72rem] tracking-[0.22em] uppercase text-muted-foreground hover:text-primary">← Back</Link>
+        <Link 
+          to={p.category === "gifting" ? "/gifting-sets" : p.category === "china" ? "/china-sets" : `/${p.category}`} 
+          className="text-[0.72rem] tracking-[0.22em] uppercase text-muted-foreground hover:text-primary"
+        >
+          ← Back to {p.category.replace("-", " ")}
+        </Link>
       </div>
       <section className="container-editorial mt-8 grid md:grid-cols-2 gap-10 md:gap-20">
         <div className="space-y-4">
