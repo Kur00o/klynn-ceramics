@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { ProductCard } from "./ProductCard";
-import { byCategory, type Category } from "@/data/products";
+import type { Category } from "@/data/products";
+import { useProducts } from "@/api/products";
 
 type Sort = "new" | "best" | "low" | "high";
 
@@ -15,7 +16,9 @@ export function CategoryPage({
   intro: string;
   hero?: string;
 }) {
-  const items = byCategory(category);
+  const { data: allProducts = [], isLoading } = useProducts();
+  const items = useMemo(() => allProducts.filter((p) => p.category === category), [allProducts, category]);
+  
   const [sort, setSort] = useState<Sort>("new");
 
   const sorted = useMemo(() => {
@@ -70,9 +73,13 @@ export function CategoryPage({
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-          {sorted.map((p, i) => (
-            <ProductCard key={p.slug} p={p} eager={i < 2} />
-          ))}
+          {isLoading ? (
+            <div className="col-span-full py-20 text-center text-muted-foreground">Loading collection...</div>
+          ) : (
+            sorted.map((p, i) => (
+              <ProductCard key={p.slug} p={p} eager={i < 2} />
+            ))
+          )}
         </div>
       </section>
     </div>

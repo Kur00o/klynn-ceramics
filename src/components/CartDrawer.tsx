@@ -2,7 +2,7 @@ import { X } from "lucide-react";
 import { useCart } from "./cart-context";
 
 export function CartDrawer() {
-  const { open, setOpen, items, remove, total } = useCart();
+  const { open, setOpen, items, remove, total, checkoutUrl, isUpdating } = useCart();
 
   return (
     <>
@@ -27,16 +27,17 @@ export function CartDrawer() {
             <p className="text-sm text-muted-foreground">Your cart is empty. The good ones take time to find.</p>
           ) : (
             items.map((i) => (
-              <div key={i.product.slug} className="flex gap-4">
+              <div key={i.product.slug} className={`flex gap-4 ${isUpdating ? "opacity-50" : ""}`}>
                 <img src={i.product.image} alt={i.product.alt} className="w-20 h-20 object-cover" />
                 <div className="flex-1">
                   <p className="serif text-lg leading-tight">{i.product.name}</p>
                   <p className="text-xs text-muted-foreground mt-1">Qty {i.qty}</p>
                   <button
                     onClick={() => remove(i.product.slug)}
-                    className="mt-2 text-[0.7rem] tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition-colors"
+                    disabled={isUpdating}
+                    className="mt-2 text-[0.7rem] tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition-colors disabled:opacity-50"
                   >
-                    Remove
+                    {isUpdating ? "Updating..." : "Remove"}
                   </button>
                 </div>
                 <p className="text-sm">${i.product.price * i.qty}</p>
@@ -50,9 +51,15 @@ export function CartDrawer() {
             <span className="eyebrow">Subtotal</span>
             <span className="serif text-2xl">${total}</span>
           </div>
-          <button className="btn-primary w-full disabled:opacity-50" disabled={items.length === 0}>
-            Checkout
-          </button>
+          {checkoutUrl ? (
+            <a href={checkoutUrl} className="btn-primary w-full text-center block disabled:opacity-50" aria-disabled={items.length === 0}>
+              Checkout securely
+            </a>
+          ) : (
+            <button className="btn-primary w-full disabled:opacity-50" disabled={items.length === 0}>
+              Checkout
+            </button>
+          )}
         </div>
       </aside>
     </>

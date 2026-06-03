@@ -5,7 +5,8 @@ import process from "@/assets/process.jpg";
 import ugc1 from "@/assets/ugc1.jpg";
 import ugc2 from "@/assets/ugc2.jpg";
 import ugc3 from "@/assets/ugc3.jpg";
-import { categoryMeta, products } from "@/data/products";
+import { categoryMeta } from "@/data/products";
+import { useProducts } from "@/api/products";
 import { ProductCard } from "@/components/ProductCard";
 
 export const Route = createFileRoute("/")({
@@ -22,6 +23,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const { data: products = [], isLoading } = useProducts();
   const featured = products.filter((p) => p.bestseller).slice(0, 4);
   const bestsellers = products.filter((p) => p.bestseller);
 
@@ -73,19 +75,23 @@ function Home() {
           </Link>
         </div>
         <div className="grid grid-cols-12 gap-6 md:gap-10">
-          {featured.map((p, i) => {
-            const layouts = [
-              "col-span-12 md:col-span-7 md:row-span-2",
-              "col-span-6 md:col-span-5",
-              "col-span-6 md:col-span-5 md:translate-y-12",
-              "col-span-12 md:col-span-7 md:-translate-y-8",
-            ];
-            return (
-              <div key={p.slug} className={layouts[i] ?? "col-span-6"}>
-                <ProductCard p={p} />
-              </div>
-            );
-          })}
+          {isLoading ? (
+            <div className="col-span-12 py-20 text-center text-muted-foreground">Loading products...</div>
+          ) : (
+            featured.map((p, i) => {
+              const layouts = [
+                "col-span-12 md:col-span-7 md:row-span-2",
+                "col-span-6 md:col-span-5",
+                "col-span-6 md:col-span-5 md:translate-y-12",
+                "col-span-12 md:col-span-7 md:-translate-y-8",
+              ];
+              return (
+                <div key={p.slug} className={layouts[i] ?? "col-span-6"}>
+                  <ProductCard p={p} />
+                </div>
+              );
+            })
+          )}
         </div>
       </section>
 
@@ -135,11 +141,15 @@ function Home() {
         </div>
         <div className="overflow-x-auto no-scrollbar">
           <div className="flex gap-6 md:gap-10 px-6 md:px-10 pb-4 min-w-max">
-            {bestsellers.map((p) => (
-              <div key={p.slug} className="w-72 md:w-96 shrink-0">
-                <ProductCard p={p} />
-              </div>
-            ))}
+            {isLoading ? (
+              <div className="w-full py-10 text-center text-muted-foreground">Loading bestsellers...</div>
+            ) : (
+              bestsellers.map((p) => (
+                <div key={p.slug} className="w-72 md:w-96 shrink-0">
+                  <ProductCard p={p} />
+                </div>
+              ))
+            )}
           </div>
         </div>
       </section>

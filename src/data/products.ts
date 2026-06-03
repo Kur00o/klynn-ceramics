@@ -25,7 +25,7 @@ export type Product = {
   description?: string;
 };
 
-export const products: Product[] = [
+export const fallbackProducts: Product[] = [
   // Bowls
   { slug: "kura-bowl", name: "Kura Bowl", descriptor: "Hand-thrown serving bowl", price: 84, image: p1, alt: "Terracotta hand-thrown bowl on linen", category: "bowls", bestseller: true,
     description: "A generous serving bowl thrown on the wheel and finished by hand. Each piece carries the quiet imperfections of its making.",
@@ -82,5 +82,5 @@ export const categoryMeta: Record<Category, { title: string; tagline: string; im
   china:    { title: "China Sets",   tagline: "A complete table",               image: catChina,   href: "/china-sets" },
 };
 
-export const byCategory = (c: Category) => products.filter((p) => p.category === c);
-export const findProduct = (slug: string) => products.find((p) => p.slug === slug);
+export const byCategory = (c: Category) => fallbackProducts.filter((p) => p.category === c);
+export const findProduct = (slug: string) => fallbackProducts.find((p) => p.slug === slug);

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link } from "@tanstack/react-router";
-import { byCategory } from "@/data/products";
+import { useProducts } from "@/api/products";
 import catChina from "@/assets/cat-china.jpg";
 
 export const Route = createFileRoute("/china-sets")({
@@ -18,7 +18,8 @@ export const Route = createFileRoute("/china-sets")({
 const SIZES = [4, 6, 8] as const;
 
 function ChinaPage() {
-  const items = byCategory("china");
+  const { data: allProducts = [], isLoading } = useProducts();
+  const items = useMemo(() => allProducts.filter((p) => p.category === "china"), [allProducts]);
   const [size, setSize] = useState<(typeof SIZES)[number]>(6);
   const factor = size / 4;
 
@@ -61,20 +62,24 @@ function ChinaPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
-          {items.map((p) => (
-            <article key={p.slug}>
-              <Link to="/product/$slug" params={{ slug: p.slug }} className="block aspect-square overflow-hidden bg-secondary">
-                <img src={p.image} alt={p.alt} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] hover:scale-105" />
-              </Link>
-              <div className="mt-5 flex items-baseline justify-between gap-4">
-                <div>
-                  <h3 className="serif text-2xl">{p.name}</h3>
-                  <p className="text-xs text-muted-foreground mt-1">Service for {size} · {size * 4} pieces</p>
+          {isLoading ? (
+            <div className="col-span-full py-20 text-center text-muted-foreground">Loading china sets...</div>
+          ) : (
+            items.map((p) => (
+              <article key={p.slug}>
+                <Link to="/product/$slug" params={{ slug: p.slug }} className="block aspect-square overflow-hidden bg-secondary">
+                  <img src={p.image} alt={p.alt} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] hover:scale-105" />
+                </Link>
+                <div className="mt-5 flex items-baseline justify-between gap-4">
+                  <div>
+                    <h3 className="serif text-2xl">{p.name}</h3>
+                    <p className="text-xs text-muted-foreground mt-1">Service for {size} · {size * 4} pieces</p>
+                  </div>
+                  <p className="serif text-xl tabular-nums">${Math.round(p.price * factor)}</p>
                 </div>
-                <p className="serif text-xl tabular-nums">${Math.round(p.price * factor)}</p>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))
+          )}
         </div>
       </section>
     </div>

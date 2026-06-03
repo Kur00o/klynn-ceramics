@@ -1,12 +1,13 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { findProduct, products, type Product } from "@/data/products";
+import { type Product } from "@/data/products";
+import { fetchProduct, useProducts } from "@/api/products";
 import { ProductCard } from "@/components/ProductCard";
 import { useCart } from "@/components/cart-context";
 import { useState } from "react";
 
 export const Route = createFileRoute("/product/$slug")({
-  loader: ({ params }) => {
-    const p = findProduct(params.slug);
+  loader: async ({ params }) => {
+    const p = await fetchProduct(params.slug);
     if (!p) throw notFound();
     return p;
   },
@@ -31,7 +32,8 @@ function PDP() {
   const p = Route.useLoaderData() as Product;
   const { add } = useCart();
   const [tab, setTab] = useState<"desc" | "materials" | "care">("desc");
-  const related = products.filter((x) => x.category === p.category && x.slug !== p.slug);
+  const { data: allProducts = [] } = useProducts();
+  const related = allProducts.filter((x) => x.category === p.category && x.slug !== p.slug);
 
   return (
     <div className="pt-28 md:pt-36">
