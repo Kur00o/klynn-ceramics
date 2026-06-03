@@ -21,7 +21,12 @@ function ChinaPage() {
   const { data: allProducts = [], isLoading } = useProducts();
   const items = useMemo(() => allProducts.filter((p) => p.category === "china"), [allProducts]);
   const [size, setSize] = useState<(typeof SIZES)[number]>(6);
+  const [searchQuery, setSearchQuery] = useState("");
   const factor = size / 4;
+
+  const filteredItems = useMemo(() => {
+    return items.filter(p => !searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase()));
+  }, [items, searchQuery]);
 
   return (
     <div className="pt-20 md:pt-24">
@@ -44,28 +49,37 @@ function ChinaPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-6 mb-12 border-y border-border py-5">
-          <span className="eyebrow">Customize set</span>
-          <div className="flex gap-3">
-            {SIZES.map((s) => (
-              <button
-                key={s}
-                onClick={() => setSize(s)}
-                className={`px-5 py-2 text-[0.72rem] tracking-[0.22em] uppercase border transition-colors ${
-                  size === s ? "bg-charcoal text-parchment border-charcoal" : "border-border hover:border-charcoal"
-                }`}
-              >
-                Service for {s}
-              </button>
-            ))}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12 border-y border-border py-5">
+          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6">
+            <span className="eyebrow">Customize set</span>
+            <div className="flex gap-3 overflow-x-auto pb-2 md:pb-0 hide-scrollbar">
+              {SIZES.map((s) => (
+                <button
+                  key={s}
+                  onClick={() => setSize(s)}
+                  className={`whitespace-nowrap px-5 py-2 text-[0.72rem] tracking-[0.22em] uppercase border transition-colors ${
+                    size === s ? "bg-charcoal text-parchment border-charcoal" : "border-border hover:border-charcoal"
+                  }`}
+                >
+                  Service for {s}
+                </button>
+              ))}
+            </div>
           </div>
+          <input
+            type="text"
+            placeholder="Search sets..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="bg-transparent border-b border-border text-sm focus:outline-none focus:border-primary pb-1 w-full md:w-56 placeholder:text-muted-foreground/50 transition-colors"
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16">
           {isLoading ? (
             <div className="col-span-full py-20 text-center text-muted-foreground">Loading china sets...</div>
           ) : (
-            items.map((p) => (
+            filteredItems.map((p) => (
               <article key={p.slug}>
                 <Link to="/product/$slug" params={{ slug: p.slug }} className="block aspect-square overflow-hidden bg-secondary">
                   <img src={p.image} alt={p.alt} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] hover:scale-105" />

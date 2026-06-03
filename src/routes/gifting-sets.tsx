@@ -1,7 +1,7 @@
+import { useState, useMemo } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useProducts } from "@/api/products";
 import catGifting from "@/assets/cat-gifting.jpg";
-import { useMemo } from "react";
 
 export const Route = createFileRoute("/gifting-sets")({
   head: () => ({
@@ -23,7 +23,11 @@ const TAGS: Record<string, string[]> = {
 
 function GiftingPage() {
   const { data: allProducts = [], isLoading } = useProducts();
-  const items = useMemo(() => allProducts.filter((p) => p.category === "gifting"), [allProducts]);
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  const items = useMemo(() => {
+    return allProducts.filter(p => p.category === "gifting" && (!searchQuery || p.name.toLowerCase().includes(searchQuery.toLowerCase())));
+  }, [allProducts, searchQuery]);
 
   return (
     <div className="pt-28 md:pt-36">
@@ -31,10 +35,17 @@ function GiftingPage() {
         <header className="max-w-2xl mb-16 fade-in">
           <p className="eyebrow">Considered Gifting</p>
           <h1 className="serif text-5xl md:text-7xl mt-4">Sets, hand-wrapped.</h1>
-          <p className="text-base md:text-lg text-muted-foreground mt-6 leading-relaxed">
+          <p className="text-base md:text-lg text-muted-foreground mt-6 leading-relaxed mb-10">
             Curated collections paired and wrapped by hand in raw linen and twine. A gift that arrives
             already feeling lived-with.
           </p>
+          <input
+            type="text"
+            placeholder="Search gifting sets..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="bg-transparent border-b border-border text-sm focus:outline-none focus:border-primary pb-1 w-full md:w-64 placeholder:text-muted-foreground/50 transition-colors"
+          />
         </header>
 
         <div className="space-y-24 md:space-y-32">

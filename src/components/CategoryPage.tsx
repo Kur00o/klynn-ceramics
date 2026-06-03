@@ -17,9 +17,16 @@ export function CategoryPage({
   hero?: string;
 }) {
   const { data: allProducts = [], isLoading } = useProducts();
-  const items = useMemo(() => allProducts.filter((p) => p.category === category), [allProducts, category]);
-  
   const [sort, setSort] = useState<Sort>("new");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const items = useMemo(() => {
+    return allProducts.filter((p) => {
+      if (p.category !== category) return false;
+      if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+      return true;
+    });
+  }, [allProducts, category, searchQuery]);
 
   const sorted = useMemo(() => {
     const arr = [...items];
@@ -57,9 +64,18 @@ export function CategoryPage({
           <p className="max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed mb-14">{intro}</p>
         )}
 
-        <div className="flex items-center justify-between border-y border-border py-4 mb-12">
-          <span className="eyebrow">{sorted.length} pieces</span>
-          <div className="flex gap-6 text-[0.72rem] tracking-[0.22em] uppercase">
+        <div className="flex flex-col md:flex-row md:items-center justify-between border-y border-border py-4 mb-12 gap-4">
+          <div className="flex items-center gap-6">
+            <span className="eyebrow">{sorted.length} pieces</span>
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-transparent border-b border-border text-sm focus:outline-none focus:border-primary pb-1 w-48 placeholder:text-muted-foreground/50 transition-colors"
+            />
+          </div>
+          <div className="flex gap-4 md:gap-6 text-[0.72rem] tracking-[0.22em] uppercase overflow-x-auto whitespace-nowrap pb-2 md:pb-0 hide-scrollbar">
             {([["new","New"],["best","Bestsellers"],["low","Price: Low"],["high","Price: High"]] as const).map(([k,l]) => (
               <button
                 key={k}
