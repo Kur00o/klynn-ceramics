@@ -45,20 +45,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const addMut = useMutation({
     mutationFn: ({ cId, variantId }: { cId: string; variantId: string }) => addToCart(cId, variantId, 1),
-    onSuccess: (data) => {
-      queryClient.setQueryData(["cart", cartId], data);
+    onSuccess: (data, variables) => {
+      queryClient.setQueryData(["cart", variables.cId], data);
       setOpen(true);
     }
   });
 
   const removeMut = useMutation({
     mutationFn: ({ cId, lineId }: { cId: string; lineId: string }) => removeFromCart(cId, lineId),
-    onSuccess: (data) => queryClient.setQueryData(["cart", cartId], data)
+    onSuccess: (data, variables) => queryClient.setQueryData(["cart", variables.cId], data)
   });
 
   const updateMut = useMutation({
     mutationFn: ({ cId, lineId, quantity }: { cId: string; lineId: string; quantity: number }) => updateCart(cId, lineId, quantity),
-    onSuccess: (data) => queryClient.setQueryData(["cart", cartId], data)
+    onSuccess: (data, variables) => queryClient.setQueryData(["cart", variables.cId], data)
   });
 
   const items: Item[] = useMemo(() => {

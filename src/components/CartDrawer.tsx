@@ -52,7 +52,11 @@ export function CartDrawer() {
             <span className="serif text-2xl">₹{total}</span>
           </div>
           {checkoutUrl ? (
-            <a href={checkoutUrl} className="btn-primary w-full text-center block disabled:opacity-50" aria-disabled={items.length === 0}>
+            <a 
+              href={items.length === 0 ? undefined : checkoutUrl} 
+              className={`btn-primary w-full text-center block ${items.length === 0 ? "opacity-50 pointer-events-none" : ""}`} 
+              aria-disabled={items.length === 0}
+            >
               Checkout securely
             </a>
           ) : (

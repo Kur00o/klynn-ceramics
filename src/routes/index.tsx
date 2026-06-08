@@ -95,18 +95,28 @@ function Home() {
         </div>
       </section>
 
-      {/* PHILOSOPHY */}
+      {/* ABOUT US */}
       <section id="story" className="mt-32 md:mt-44 bg-secondary py-28 md:py-40">
         <div className="container-editorial max-w-4xl text-center">
-          <p className="eyebrow">Philosophy</p>
-          <blockquote className="serif italic text-3xl md:text-5xl leading-[1.15] mt-8">
-            "We make slowly, on purpose. Clay remembers the hand that shaped it,
-            and a quiet table holds more than dinner."
-          </blockquote>
-          <p className="mt-10 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Every piece begins as raw clay from a single quarry, finished with lead-free glazes mixed
-            by hand. Nothing is rushed. Nothing is mass-made. The dust on our hands is part of the work.
-          </p>
+          <p className="eyebrow">About us</p>
+          <h2 className="serif text-3xl md:text-5xl leading-[1.2] mt-8 text-foreground">
+            Founded in 2026 by Khushi Parmar, Klynn Ceramics is a ceramic tableware company based in Phursungi, Pune, India.
+          </h2>
+          <div className="mt-12 grid md:grid-cols-2 gap-8 md:gap-12 text-left text-muted-foreground leading-relaxed">
+            <div className="space-y-6">
+              <p>
+                Established with a vision to create thoughtfully designed ceramic tableware, Klynn combines contemporary aesthetics with dependable manufacturing expertise. Our collections are developed for hospitality brands, cafés, restaurants, retailers, and design-conscious homes that value quality, functionality, and timeless design.
+              </p>
+            </div>
+            <div className="space-y-6">
+              <p>
+                At Klynn, we believe tableware is more than a functional object it shapes experiences. Every plate, bowl, and mug is designed to complement modern dining while maintaining the warmth and authenticity that only ceramic can offer.
+              </p>
+              <p>
+                Guided by simplicity and inspired by natural forms, our products reflect an understated elegance that seamlessly integrates into contemporary spaces across the world.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -171,14 +181,12 @@ function Home() {
         </div>
         <div className="md:pr-10">
           <p className="eyebrow">Material</p>
-          <h2 className="serif text-4xl md:text-6xl mt-3 leading-[1.05]">A material with memory.</h2>
-          <p className="mt-7 text-muted-foreground leading-relaxed">
-            Our clay comes from a single quarry. We blend it with grog and
-            kaolin, age the body for weeks, and finish each piece by hand. The irregularities you see, like a softer
-            edge or a richer pool of glaze, are intentional—framing these handmade traits as a mark of true luxury and the language of the kiln.
+          <h2 className="serif text-4xl md:text-6xl mt-3 leading-[1.05]">The Strength Behind Every Collection</h2>
+          <p className="mt-7 text-muted-foreground leading-relaxed font-medium">
+            Exceptional tableware begins with exceptional materials.
           </p>
           <p className="mt-5 text-muted-foreground leading-relaxed">
-            We fire to stoneware temperatures, ensuring every piece is completely lead-free, food-safe, dishwasher-safe, and built to outlast trends.
+            Klynn Ceramics uses carefully selected ceramic and stoneware compositions engineered for durability, performance, and aesthetic refinement. Our products are fired at high temperatures to achieve superior strength, longevity, and resistance to everyday wear.
           </p>
           <Link to="/contact" className="link-underline mt-10 inline-block text-[0.78rem] tracking-[0.22em] uppercase">
             Get in touch <ArrowRight className="inline w-3.5 h-3.5 ml-1" strokeWidth={1.4} />
