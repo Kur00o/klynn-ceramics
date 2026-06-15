@@ -30,8 +30,8 @@ function Contact() {
           <div>
             <p className="eyebrow mb-3">Get in touch</p>
             <p className="text-lg leading-relaxed">
-              <a href="mailto:hello@klynnceramics.com" className="link-underline">hello@klynnceramics.com</a><br />
-              <a href="tel:+61200000000" className="link-underline">+61 2 0000 0000</a>
+              <a href="mailto:klynnceramics@gmail.com" className="link-underline">klynnceramics@gmail.com</a><br />
+              <a href="tel:+918308474731" className="link-underline">+91 83084 74731</a>
             </p>
           </div>
 

@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Facebook } from "lucide-react";
+import { Instagram } from "lucide-react";
 
 export function Footer() {
   return (
@@ -28,8 +28,7 @@ export function Footer() {
             <li><Link to="/contact" className="link-underline">Contact</Link></li>
           </ul>
           <div className="flex gap-4 mt-6 text-foreground/70">
-            <a href="#" aria-label="Instagram" className="hover:text-primary transition-colors"><Instagram className="w-4 h-4" strokeWidth={1.4} /></a>
-            <a href="#" aria-label="Facebook" className="hover:text-primary transition-colors"><Facebook className="w-4 h-4" strokeWidth={1.4} /></a>
+            <a href="https://instagram.com/klynn.ceramics" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-primary transition-colors"><Instagram className="w-4 h-4" strokeWidth={1.4} /></a>
           </div>
         </div>
       </div>
