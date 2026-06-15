@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -12,7 +11,6 @@ export const Route = createFileRoute("/contact")({
 });
 
 function Contact() {
-  const [sent, setSent] = useState(false);
   return (
     <div className="pt-28 md:pt-36 container-editorial">
       <header className="max-w-2xl mb-16 fade-in">
@@ -38,14 +36,17 @@ function Contact() {
         </div>
 
         <form
-          onSubmit={(e) => { e.preventDefault(); setSent(true); }}
+          method="POST"
+          action={`https://${import.meta.env.VITE_SHOPIFY_STORE_DOMAIN}/contact`}
           className="space-y-7"
         >
-          <Field label="Name" name="name" />
-          <Field label="Email" name="email" type="email" />
+          <input type="hidden" name="form_type" value="contact" />
+          <input type="hidden" name="utf8" value="✓" />
+          <Field label="Name" name="contact[name]" />
+          <Field label="Email" name="contact[email]" type="email" />
           <div>
             <label className="eyebrow mb-2 block">Subject</label>
-            <select className="w-full bg-transparent border-b border-border focus:border-primary py-3 text-base outline-none transition-colors">
+            <select name="contact[subject]" className="w-full bg-transparent border-b border-border focus:border-primary py-3 text-base outline-none transition-colors">
               <option>General enquiry</option>
               <option>Trade &amp; wholesale</option>
               <option>Custom commission</option>
@@ -54,9 +55,9 @@ function Contact() {
           </div>
           <div>
             <label className="eyebrow mb-2 block">Message</label>
-            <textarea rows={5} className="w-full bg-transparent border-b border-border focus:border-primary py-3 text-base outline-none resize-none transition-colors" placeholder="Tell us a little about it…" />
+            <textarea name="contact[body]" rows={5} className="w-full bg-transparent border-b border-border focus:border-primary py-3 text-base outline-none resize-none transition-colors" placeholder="Tell us a little about it…" />
           </div>
-          <button className="btn-primary" type="submit">{sent ? "Thank you, we'll be in touch" : "Send message"}</button>
+          <button className="btn-primary" type="submit">Send message</button>
         </form>
       </div>
     </div>
