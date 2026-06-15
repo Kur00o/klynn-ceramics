@@ -96,7 +96,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         console.warn("No variant ID found for product", p.slug);
         return;
       }
-      
+
       const existing = items.find((i) => i.product.slug === p.slug);
       let activeCartId = cartId;
 

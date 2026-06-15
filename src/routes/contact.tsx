@@ -26,14 +26,7 @@ function Contact() {
 
       <div className="grid md:grid-cols-2 gap-16 md:gap-24">
         <div className="space-y-10">
-          <div>
-            <p className="eyebrow mb-3">Location</p>
-            <p className="text-lg leading-relaxed">
-              14 Kiln Lane<br />
-              Bywater, NSW 2480<br />
-              Australia
-            </p>
-          </div>
+
           <div>
             <p className="eyebrow mb-3">Get in touch</p>
             <p className="text-lg leading-relaxed">

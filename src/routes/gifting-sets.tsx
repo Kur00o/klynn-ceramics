@@ -67,12 +67,7 @@ function GiftingPage() {
                   <p className="mt-6 leading-relaxed text-foreground/90 max-w-md">
                     {p.description ?? "A considered pairing of pieces from across the collection, hand-finished in matching tones."}
                   </p>
-                  <ul className="mt-8 space-y-2 text-sm text-muted-foreground border-l border-border pl-5">
-                    <li>2 hand-thrown bowls</li>
-                    <li>2 side plates</li>
-                    <li>2 hand-pulled mugs</li>
-                    <li>Wrapped in raw linen and twine</li>
-                  </ul>
+
                   <div className="mt-8 flex flex-wrap gap-2">
                     {(TAGS[p.slug] ?? ["Curated"]).map((t) => (
                       <span key={t} className="text-[0.7rem] tracking-[0.22em] uppercase border border-border px-3 py-1 text-muted-foreground">
