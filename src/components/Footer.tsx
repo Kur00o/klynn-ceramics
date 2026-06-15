@@ -4,7 +4,7 @@ import { Instagram, Facebook } from "lucide-react";
 export function Footer() {
   return (
     <footer className="mt-32 border-t border-border bg-secondary/40">
-      <div className="container-editorial py-20 grid gap-12 md:grid-cols-4">
+      <div className="container-editorial py-20 grid gap-12 md:grid-cols-3">
         <div>
           <Link to="/" className="flex items-center">
             <img src="/logo.png" alt="Klynn" className="h-8 md:h-10 w-auto object-contain" />
@@ -26,24 +26,7 @@ export function Footer() {
           <p className="eyebrow mb-4">Connect</p>
           <ul className="space-y-2.5 text-sm">
             <li><Link to="/contact" className="link-underline">Contact</Link></li>
-            <li><span className="text-muted-foreground">Care &amp; Repair</span></li>
-            <li><span className="text-muted-foreground">Trade enquiries</span></li>
           </ul>
-        </div>
-        <div>
-          <p className="eyebrow mb-4">Newsletter</p>
-          <p className="text-sm text-muted-foreground mb-3">Quiet notes from us. New drops, no spam.</p>
-          <form className="flex border-b border-foreground/40 focus-within:border-primary transition-colors">
-            <input
-              type="email"
-              required
-              placeholder="your@email.com"
-              className="flex-1 bg-transparent py-2 text-sm placeholder:text-muted-foreground focus:outline-none"
-            />
-            <button className="text-[0.7rem] tracking-[0.22em] uppercase text-foreground hover:text-primary transition-colors">
-              Join
-            </button>
-          </form>
           <div className="flex gap-4 mt-6 text-foreground/70">
             <a href="#" aria-label="Instagram" className="hover:text-primary transition-colors"><Instagram className="w-4 h-4" strokeWidth={1.4} /></a>
             <a href="#" aria-label="Facebook" className="hover:text-primary transition-colors"><Facebook className="w-4 h-4" strokeWidth={1.4} /></a>

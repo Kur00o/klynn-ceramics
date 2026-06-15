@@ -34,7 +34,12 @@ function Home() {
       return catProducts[Math.floor(Math.random() * catProducts.length)];
     }).filter(Boolean) as typeof products;
   }, [products]);
-  const bestsellers = products.filter((p) => p.bestseller);
+  const bestsellers = useMemo(() => {
+    const b = products.filter((p) => p.bestseller);
+    if (b.length > 0) return b;
+    if (products.length === 0) return [];
+    return [...products].sort(() => 0.5 - Math.random()).slice(0, 4);
+  }, [products]);
 
   return (
     <>
@@ -92,7 +97,7 @@ function Home() {
                 "col-span-12 md:col-span-7 md:row-span-2",
                 "col-span-6 md:col-span-5",
                 "col-span-6 md:col-span-5 md:translate-y-12",
-                "col-span-12 md:col-span-7 md:-translate-y-8",
+                "col-span-12 md:col-span-7 md:-mt-20 md:-translate-y-8",
               ];
               return (
                 <div key={p.slug} className={layouts[i] ?? "col-span-6"}>
@@ -173,13 +178,15 @@ function Home() {
         </div>
       </section>
 
-      {/* PRESS */}
-      <section className="container-editorial mt-32 md:mt-44 border-y border-border py-12">
-        <p className="eyebrow text-center mb-8">As featured in</p>
-        <div className="flex items-center justify-center gap-10 md:gap-20 flex-wrap text-muted-foreground/70">
-          {["Kinfolk","Apartamento","Cereal","The World of Interiors","Architectural Digest"].map((n) => (
-            <span key={n} className="serif italic text-xl md:text-2xl tracking-tight">{n}</span>
-          ))}
+      {/* QUOTE */}
+      <section className="container-editorial mt-32 md:mt-44 border-y border-border py-20 text-center">
+        <div className="max-w-3xl mx-auto">
+          <blockquote className="serif text-3xl md:text-5xl leading-tight text-foreground/90">
+            "Have nothing in your house that you do not know to be useful, or believe to be beautiful."
+          </blockquote>
+          <p className="mt-8 text-sm uppercase tracking-[0.2em] text-muted-foreground">
+            — William Morris
+          </p>
         </div>
       </section>
 
@@ -221,18 +228,6 @@ function Home() {
         </div>
       </section>
 
-      {/* EMAIL CAPTURE */}
-      <section className="mt-32 md:mt-44 bg-charcoal text-parchment py-24">
-        <div className="container-editorial max-w-3xl text-center">
-          <p className="eyebrow text-parchment/70">Quiet drops</p>
-          <h2 className="serif text-4xl md:text-5xl mt-4">Join the waitlist for new drops.</h2>
-          <p className="mt-5 text-parchment/70">Small batches. Sent only when there's something worth sending.</p>
-          <form className="mt-10 flex max-w-md mx-auto border-b border-parchment/40 focus-within:border-parchment transition-colors">
-            <input type="email" required placeholder="your@email.com" className="flex-1 bg-transparent py-3 text-base placeholder:text-parchment/40 focus:outline-none" />
-            <button className="text-[0.72rem] tracking-[0.22em] uppercase">Join →</button>
-          </form>
-        </div>
-      </section>
     </>
   );
 }
