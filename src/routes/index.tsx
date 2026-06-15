@@ -88,23 +88,23 @@ function Home() {
             Shop all <ArrowRight className="inline w-3.5 h-3.5 ml-1" strokeWidth={1.4} />
           </Link>
         </div>
-        <div className="grid grid-cols-12 gap-6 md:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10">
           {isLoading ? (
             <div className="col-span-12 py-20 text-center text-muted-foreground">Loading products...</div>
           ) : (
-            featured.map((p, i) => {
-              const layouts = [
-                "col-span-12 md:col-span-7 md:row-span-2",
-                "col-span-6 md:col-span-5",
-                "col-span-6 md:col-span-5 md:translate-y-12",
-                "col-span-12 md:col-span-7 md:-mt-20 md:-translate-y-8",
-              ];
-              return (
-                <div key={p.slug} className={layouts[i] ?? "col-span-6"}>
-                  <ProductCard p={p} />
-                </div>
-              );
-            })
+            <>
+              {/* Left Column */}
+              <div className="md:col-span-7 flex flex-col gap-6 md:gap-10">
+                {featured[0] && <ProductCard p={featured[0]} />}
+                {featured[3] && <ProductCard p={featured[3]} />}
+              </div>
+              
+              {/* Right Column */}
+              <div className="md:col-span-5 flex flex-col gap-6 md:gap-10 md:pt-32">
+                {featured[1] && <ProductCard p={featured[1]} />}
+                {featured[2] && <ProductCard p={featured[2]} />}
+              </div>
+            </>
           )}
         </div>
       </section>
