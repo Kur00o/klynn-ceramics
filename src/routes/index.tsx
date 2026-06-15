@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useMemo } from "react";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import hero from "@/assets/hero.png";
 import process from "@/assets/process.jpg";
@@ -24,7 +25,15 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const { data: products = [], isLoading } = useProducts();
-  const featured = products.filter((p) => p.bestseller).slice(0, 4);
+  const featured = useMemo(() => {
+    if (products.length === 0) return [];
+    const categories = ["bowls", "plates", "mugs", "gifting"] as const;
+    return categories.map(cat => {
+      const catProducts = products.filter(p => p.category === cat);
+      if (catProducts.length === 0) return null;
+      return catProducts[Math.floor(Math.random() * catProducts.length)];
+    }).filter(Boolean) as typeof products;
+  }, [products]);
   const bestsellers = products.filter((p) => p.bestseller);
 
   return (
@@ -95,6 +104,29 @@ function Home() {
         </div>
       </section>
 
+      {/* BESTSELLERS */}
+      <section className="mt-32 md:mt-44">
+        <div className="container-editorial flex items-end justify-between mb-10">
+          <div>
+            <p className="eyebrow">Bestsellers</p>
+            <h2 className="serif text-4xl md:text-6xl mt-3">Lived with, loved daily.</h2>
+          </div>
+        </div>
+        <div className="overflow-x-auto no-scrollbar">
+          <div className="flex gap-6 md:gap-10 px-6 md:px-10 pb-4 min-w-max">
+            {isLoading ? (
+              <div className="w-full py-10 text-center text-muted-foreground">Loading bestsellers...</div>
+            ) : (
+              bestsellers.map((p) => (
+                <div key={p.slug} className="w-72 md:w-96 shrink-0">
+                  <ProductCard p={p} />
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </section>
+
       {/* ABOUT US */}
       <section id="story" className="mt-32 md:mt-44 bg-secondary py-28 md:py-40">
         <div className="container-editorial max-w-4xl text-center">
@@ -138,29 +170,6 @@ function Home() {
               </Link>
             );
           })}
-        </div>
-      </section>
-
-      {/* BESTSELLERS */}
-      <section className="mt-32 md:mt-44">
-        <div className="container-editorial flex items-end justify-between mb-10">
-          <div>
-            <p className="eyebrow">Bestsellers</p>
-            <h2 className="serif text-4xl md:text-6xl mt-3">Lived with, loved daily.</h2>
-          </div>
-        </div>
-        <div className="overflow-x-auto no-scrollbar">
-          <div className="flex gap-6 md:gap-10 px-6 md:px-10 pb-4 min-w-max">
-            {isLoading ? (
-              <div className="w-full py-10 text-center text-muted-foreground">Loading bestsellers...</div>
-            ) : (
-              bestsellers.map((p) => (
-                <div key={p.slug} className="w-72 md:w-96 shrink-0">
-                  <ProductCard p={p} />
-                </div>
-              ))
-            )}
-          </div>
         </div>
       </section>
 
