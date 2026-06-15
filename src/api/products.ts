@@ -17,7 +17,6 @@ const mapShopifyProduct = (shopifyProduct: any): Product & { shopifyId: string; 
   else if (collectionTitles.some(t => t.includes("plate"))) category = "plates";
   else if (collectionTitles.some(t => t.includes("mug"))) category = "mugs";
   else if (collectionTitles.some(t => t.includes("gift"))) category = "gifting";
-  else if (collectionTitles.some(t => t.includes("china"))) category = "china";
   else {
     // Fallback to tags if collection doesn't match
     const categoryTag = tags.find(t => t.startsWith('category:'))?.replace('category:', '') as Category;

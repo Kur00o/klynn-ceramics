@@ -12,6 +12,7 @@ type CartCtx = {
   setOpen: (v: boolean) => void;
   add: (p: Product) => void;
   remove: (slug: string) => void;
+  update: (slug: string, qty: number) => void;
   checkoutUrl?: string;
   isUpdating: boolean;
 };
@@ -115,6 +116,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (!cartId) return;
       const line = items.find(i => i.product.slug === slug);
       if (line) removeMut.mutate({ cId: cartId, lineId: line.lineId });
+    },
+    update: (slug, qty) => {
+      if (!cartId) return;
+      const line = items.find(i => i.product.slug === slug);
+      if (line) {
+        if (qty <= 0) removeMut.mutate({ cId: cartId, lineId: line.lineId });
+        else updateMut.mutate({ cId: cartId, lineId: line.lineId, quantity: qty });
+      }
     },
   }), [items, open, cartId, cartData, createCartMut.isPending, addMut.isPending, removeMut.isPending, updateMut.isPending]);
 

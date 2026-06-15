@@ -124,8 +124,8 @@ function Home() {
       <section className="container-editorial mt-32 md:mt-44">
         <p className="eyebrow">Collections</p>
         <h2 className="serif text-4xl md:text-6xl mt-3 mb-14">The whole table.</h2>
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 md:gap-5">
-          {(["bowls","plates","mugs","gifting","china"] as const).map((k) => {
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+          {(["bowls","plates","mugs","gifting"] as const).map((k) => {
             const m = categoryMeta[k];
             return (
               <Link key={k} to={m.href} className="group relative aspect-[3/4] overflow-hidden bg-secondary block">

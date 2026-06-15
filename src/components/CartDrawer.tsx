@@ -2,7 +2,7 @@ import { X } from "lucide-react";
 import { useCart } from "./cart-context";
 
 export function CartDrawer() {
-  const { open, setOpen, items, remove, total, checkoutUrl, isUpdating } = useCart();
+  const { open, setOpen, items, remove, update, total, checkoutUrl, isUpdating } = useCart();
 
   return (
     <>
@@ -31,7 +31,23 @@ export function CartDrawer() {
                 <img src={i.product.image} alt={i.product.alt} className="w-20 h-20 object-cover" />
                 <div className="flex-1">
                   <p className="serif text-lg leading-tight">{i.product.name}</p>
-                  <p className="text-xs text-muted-foreground mt-1">Qty {i.qty}</p>
+                  <div className="flex items-center gap-3 mt-2 border border-border w-fit px-2 py-1 rounded-sm">
+                    <button 
+                      onClick={() => update(i.product.slug, i.qty - 1)}
+                      disabled={isUpdating}
+                      className="text-muted-foreground hover:text-foreground px-1 disabled:opacity-50"
+                    >
+                      -
+                    </button>
+                    <span className="text-xs w-4 text-center">{i.qty}</span>
+                    <button 
+                      onClick={() => update(i.product.slug, i.qty + 1)}
+                      disabled={isUpdating}
+                      className="text-muted-foreground hover:text-foreground px-1 disabled:opacity-50"
+                    >
+                      +
+                    </button>
+                  </div>
                   <button
                     onClick={() => remove(i.product.slug)}
                     disabled={isUpdating}
@@ -52,13 +68,15 @@ export function CartDrawer() {
             <span className="serif text-2xl">₹{total}</span>
           </div>
           {checkoutUrl ? (
-            <a 
-              href={items.length === 0 ? undefined : checkoutUrl} 
-              className={`btn-primary w-full text-center block ${items.length === 0 ? "opacity-50 pointer-events-none" : ""}`} 
-              aria-disabled={items.length === 0}
+            <button 
+              onClick={() => {
+                if (checkoutUrl && items.length > 0) window.location.href = checkoutUrl;
+              }}
+              className={`btn-primary w-full text-center block ${items.length === 0 ? "opacity-50 cursor-not-allowed" : ""}`} 
+              disabled={items.length === 0}
             >
               Checkout securely
-            </a>
+            </button>
           ) : (
             <button className="btn-primary w-full disabled:opacity-50" disabled={items.length === 0}>
               Checkout

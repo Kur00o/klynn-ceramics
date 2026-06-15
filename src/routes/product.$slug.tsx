@@ -39,7 +39,7 @@ function PDP() {
     <div className="pt-28 md:pt-36">
       <div className="container-editorial">
         <Link 
-          to={p.category === "gifting" ? "/gifting-sets" : p.category === "china" ? "/china-sets" : `/${p.category}`} 
+          to={p.category === "gifting" ? "/gifting-sets" : `/${p.category}`} 
           className="text-[0.72rem] tracking-[0.22em] uppercase text-muted-foreground hover:text-primary"
         >
           ← Back to {p.category.replace("-", " ")}

@@ -6,9 +6,8 @@ import catBowls from "@/assets/cat-bowls.jpg";
 import catPlates from "@/assets/cat-plates.jpg";
 import catMugs from "@/assets/cat-mugs.jpg";
 import catGifting from "@/assets/cat-gifting.jpg";
-import catChina from "@/assets/cat-china.jpg";
 
-export type Category = "bowls" | "plates" | "mugs" | "gifting" | "china";
+export type Category = "bowls" | "plates" | "mugs" | "gifting";
 
 export type Product = {
   slug: string;
@@ -64,14 +63,6 @@ export const fallbackProducts: Product[] = [
   { slug: "first-home", name: "First Home", descriptor: "Housewarming essentials", price: 240, image: catGifting, alt: "Housewarming gift set", category: "gifting", newArrival: true },
   { slug: "morning-ritual", name: "Morning Ritual", descriptor: "Two mugs, two bowls", price: 180, image: catGifting, alt: "Morning ritual gift set", category: "gifting" },
   { slug: "anniversary-set", name: "Anniversary", descriptor: "Heirloom pair", price: 280, image: catGifting, alt: "Anniversary heirloom set", category: "gifting" },
-
-  // China
-  { slug: "earth-china", name: "Earth Service", descriptor: "Service for 4 / 6 / 8", price: 720, image: catChina, alt: "Earth tone china set table", category: "china", bestseller: true,
-    description: "A complete table in considered earth tones. Plates, bowls, side plates and tumblers, available in three sizes.",
-    materials: "Stoneware. Earth, sand and clay glazes.",
-    care: "All pieces dishwasher safe." },
-  { slug: "linen-china", name: "Linen Service", descriptor: "Service for 4 / 6 / 8", price: 760, image: catChina, alt: "Cream linen china set", category: "china" },
-  { slug: "ash-china", name: "Ash Service", descriptor: "Service for 4 / 6 / 8", price: 780, image: catChina, alt: "Ash tone china set", category: "china", newArrival: true },
 ];
 
 export const categoryMeta: Record<Category, { title: string; tagline: string; image: string; href: string }> = {
@@ -79,7 +70,6 @@ export const categoryMeta: Record<Category, { title: string; tagline: string; im
   plates:   { title: "Plates",       tagline: "The quiet anchor of the table",  image: catPlates,  href: "/plates" },
   mugs:     { title: "Mugs",         tagline: "For the slow morning",           image: catMugs,    href: "/mugs" },
   gifting:  { title: "Gifting Sets", tagline: "Considered, hand-wrapped",       image: catGifting, href: "/gifting-sets" },
-  china:    { title: "China Sets",   tagline: "A complete table",               image: catChina,   href: "/china-sets" },
 };
 
 export const byCategory = (c: Category) => fallbackProducts.filter((p) => p.category === c);

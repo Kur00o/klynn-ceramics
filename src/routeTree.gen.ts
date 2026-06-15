@@ -13,7 +13,6 @@ import { Route as PlatesRouteImport } from './routes/plates'
 import { Route as MugsRouteImport } from './routes/mugs'
 import { Route as GiftingSetsRouteImport } from './routes/gifting-sets'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as ChinaSetsRouteImport } from './routes/china-sets'
 import { Route as BowlsRouteImport } from './routes/bowls'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
@@ -38,11 +37,6 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ChinaSetsRoute = ChinaSetsRouteImport.update({
-  id: '/china-sets',
-  path: '/china-sets',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BowlsRoute = BowlsRouteImport.update({
   id: '/bowls',
   path: '/bowls',
@@ -62,7 +56,6 @@ const ProductSlugRoute = ProductSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/bowls': typeof BowlsRoute
-  '/china-sets': typeof ChinaSetsRoute
   '/contact': typeof ContactRoute
   '/gifting-sets': typeof GiftingSetsRoute
   '/mugs': typeof MugsRoute
@@ -72,7 +65,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bowls': typeof BowlsRoute
-  '/china-sets': typeof ChinaSetsRoute
   '/contact': typeof ContactRoute
   '/gifting-sets': typeof GiftingSetsRoute
   '/mugs': typeof MugsRoute
@@ -83,7 +75,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/bowls': typeof BowlsRoute
-  '/china-sets': typeof ChinaSetsRoute
   '/contact': typeof ContactRoute
   '/gifting-sets': typeof GiftingSetsRoute
   '/mugs': typeof MugsRoute
@@ -95,7 +86,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/bowls'
-    | '/china-sets'
     | '/contact'
     | '/gifting-sets'
     | '/mugs'
@@ -105,7 +95,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/bowls'
-    | '/china-sets'
     | '/contact'
     | '/gifting-sets'
     | '/mugs'
@@ -115,7 +104,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/bowls'
-    | '/china-sets'
     | '/contact'
     | '/gifting-sets'
     | '/mugs'
@@ -126,7 +114,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BowlsRoute: typeof BowlsRoute
-  ChinaSetsRoute: typeof ChinaSetsRoute
   ContactRoute: typeof ContactRoute
   GiftingSetsRoute: typeof GiftingSetsRoute
   MugsRoute: typeof MugsRoute
@@ -164,13 +151,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/china-sets': {
-      id: '/china-sets'
-      path: '/china-sets'
-      fullPath: '/china-sets'
-      preLoaderRoute: typeof ChinaSetsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/bowls': {
       id: '/bowls'
       path: '/bowls'
@@ -198,7 +178,6 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BowlsRoute: BowlsRoute,
-  ChinaSetsRoute: ChinaSetsRoute,
   ContactRoute: ContactRoute,
   GiftingSetsRoute: GiftingSetsRoute,
   MugsRoute: MugsRoute,

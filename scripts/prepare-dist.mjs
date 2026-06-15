@@ -29,7 +29,6 @@ const routes = [
   "/bowls",
   "/plates",
   "/mugs",
-  "/china-sets",
   "/gifting-sets",
   "/contact",
   "/product/kura-bowl",
@@ -48,9 +47,6 @@ const routes = [
   "/product/first-home",
   "/product/morning-ritual",
   "/product/anniversary-set",
-  "/product/earth-china",
-  "/product/linen-china",
-  "/product/ash-china",
 ];
 
 function routeToFile(route) {

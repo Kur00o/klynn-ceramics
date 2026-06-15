@@ -20,7 +20,6 @@ export function Footer() {
             <li><Link to="/plates" className="link-underline">Plates</Link></li>
             <li><Link to="/mugs" className="link-underline">Mugs</Link></li>
             <li><Link to="/gifting-sets" className="link-underline">Gifting Sets</Link></li>
-            <li><Link to="/china-sets" className="link-underline">China Sets</Link></li>
           </ul>
         </div>
         <div>
