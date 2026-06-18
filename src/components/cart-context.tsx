@@ -73,8 +73,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
         slug: prod.handle,
         name: prod.title,
         price: parseFloat(merch.price.amount),
-        image: prod.images?.edges?.[0]?.node?.url || "",
-        alt: prod.title
+        image: prod.featuredImage?.url || prod.images?.edges?.[0]?.node?.url || "",
+        alt: prod.featuredImage?.altText || prod.images?.edges?.[0]?.node?.altText || prod.title
       };
       return { product: p as Product, qty: node.quantity, lineId: node.id };
     });

@@ -5,8 +5,8 @@ import { fallbackProducts, type Product, type Category } from '@/data/products';
 
 const mapShopifyProduct = (shopifyProduct: any): Product & { shopifyId: string; shopifyVariants: any[] } => {
   const price = parseFloat(shopifyProduct.priceRange?.minVariantPrice?.amount || "0");
-  const image = shopifyProduct.images?.edges?.[0]?.node?.url || fallbackProducts[0].image; // fallback to prevent broken UI
-  const alt = shopifyProduct.images?.edges?.[0]?.node?.altText || shopifyProduct.title;
+  const image = shopifyProduct.featuredImage?.url || shopifyProduct.images?.edges?.[0]?.node?.url || fallbackProducts[0].image; // fallback to prevent broken UI
+  const alt = shopifyProduct.featuredImage?.altText || shopifyProduct.images?.edges?.[0]?.node?.altText || shopifyProduct.title;
   
   const tags: string[] = shopifyProduct.tags || [];
   

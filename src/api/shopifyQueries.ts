@@ -14,6 +14,10 @@ export const getProductsQuery = `
               currencyCode
             }
           }
+          featuredImage {
+            url
+            altText
+          }
           images(first: 1) {
             edges {
               node {
@@ -64,6 +68,10 @@ export const getProductByHandleQuery = `
           amount
           currencyCode
         }
+      }
+      featuredImage {
+        url
+        altText
       }
       images(first: 5) {
         edges {
@@ -128,6 +136,9 @@ export const createCartMutation = `
                   product {
                     title
                     handle
+                    featuredImage {
+                      url
+                    }
                     images(first: 1) {
                       edges {
                         node {
@@ -174,6 +185,9 @@ export const addToCartMutation = `
                   product {
                     title
                     handle
+                    featuredImage {
+                      url
+                    }
                     images(first: 1) {
                       edges {
                         node {
@@ -220,6 +234,9 @@ export const updateCartLinesMutation = `
                   product {
                     title
                     handle
+                    featuredImage {
+                      url
+                    }
                     images(first: 1) {
                       edges {
                         node {
@@ -266,6 +283,9 @@ export const removeFromCartMutation = `
                   product {
                     title
                     handle
+                    featuredImage {
+                      url
+                    }
                     images(first: 1) {
                       edges {
                         node {
