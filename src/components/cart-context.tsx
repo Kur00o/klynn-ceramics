@@ -86,7 +86,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     setOpen,
     count: items.reduce((s, i) => s + i.qty, 0),
     total: parseFloat(cartData?.cost?.totalAmount?.amount || "0"),
-    checkoutUrl: cartData?.checkoutUrl,
+    checkoutUrl: cartData?.checkoutUrl 
+      ? cartData.checkoutUrl.replace("checkout.klynnceramics.com", "klynn-ceramics.myshopify.com")
+      : undefined,
     isUpdating: createCartMut.isPending || addMut.isPending || removeMut.isPending || updateMut.isPending,
     add: async (p) => {
       // Find variant ID. Since we attached it to the product object during mapping, we use it. 
