@@ -136,7 +136,7 @@ function Home() {
           </div>
         </motion.div>
         <div className="overflow-x-auto no-scrollbar">
-          <div className="flex gap-6 md:gap-10 px-6 md:px-10 pb-4 min-w-max">
+          <div className="flex gap-6 md:gap-10 scroll-pl pr-6 md:pr-10 pb-4 min-w-max">
             {isLoading ? (
               <div className="w-full py-10 text-center text-muted-foreground">Loading bestsellers...</div>
             ) : (
