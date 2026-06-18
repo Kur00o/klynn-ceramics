@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram } from "lucide-react";
+import { Instagram, Phone, Mail } from "lucide-react";
 
 export function Footer() {
   return (
@@ -24,8 +24,20 @@ export function Footer() {
         </div>
         <div>
           <p className="eyebrow mb-4">Connect</p>
-          <ul className="space-y-2.5 text-sm">
+          <ul className="space-y-3 text-sm">
             <li><Link to="/contact" className="link-underline">Contact</Link></li>
+            <li>
+              <a href="tel:+918308474731" className="flex items-center gap-2 hover:text-primary transition-colors group">
+                <Phone className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" strokeWidth={1.4} />
+                <span>+91 83084 74731</span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:klynnceramics@gmail.com" className="flex items-center gap-2 hover:text-primary transition-colors group">
+                <Mail className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" strokeWidth={1.4} />
+                <span>klynnceramics@gmail.com</span>
+              </a>
+            </li>
           </ul>
           <div className="flex gap-4 mt-6 text-foreground/70">
             <a href="https://instagram.com/klynn.ceramics" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-primary transition-colors"><Instagram className="w-4 h-4" strokeWidth={1.4} /></a>
