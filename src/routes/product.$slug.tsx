@@ -4,6 +4,7 @@ import { fetchProduct, useProducts } from "@/api/products";
 import { ProductCard } from "@/components/ProductCard";
 import { useCart } from "@/components/cart-context";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/product/$slug")({
   loader: async ({ params }) => {
@@ -52,7 +53,12 @@ function PDP() {
         </Link>
       </div>
       <section className="container-editorial mt-8 grid md:grid-cols-2 gap-10 md:gap-20">
-        <div className="space-y-4">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="space-y-4"
+        >
           <div className="relative aspect-square overflow-hidden bg-secondary group">
             <img 
               src={allImages[currentImageIndex]} 
@@ -91,9 +97,14 @@ function PDP() {
               ))}
             </div>
           )}
-        </div>
+        </motion.div>
 
-        <div className="md:pt-6 md:sticky md:top-28 md:self-start">
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+          className="md:pt-6 md:sticky md:top-28 md:self-start"
+        >
           <p className="eyebrow">{p.category}</p>
           <h1 className="serif text-4xl md:text-6xl mt-4 leading-[1.05]">{p.name}</h1>
           <p className="text-muted-foreground mt-3">{p.descriptor}</p>
@@ -104,19 +115,29 @@ function PDP() {
           <div className="mt-12 border-t border-border">
             <div className="flex gap-8 pt-5 text-[0.72rem] tracking-[0.22em] uppercase">
               {(["desc","materials","care"] as const).map((t) => (
-                <button key={t} onClick={() => setTab(t)} className={tab === t ? "text-primary" : "text-muted-foreground"}>
+                <button key={t} onClick={() => setTab(t)} className={tab === t ? "text-primary" : "text-muted-foreground transition-colors hover:text-foreground"}>
                   {t === "desc" ? "Description" : t === "materials" ? "Materials" : "Care"}
                 </button>
               ))}
             </div>
-            <div className="mt-5 text-sm leading-relaxed text-foreground/90 min-h-[6rem]">
-              {tab === "desc" && (
-                p.descriptionHtml ? 
-                  <div dangerouslySetInnerHTML={{ __html: p.descriptionHtml }} className="space-y-2 [&>p]:mb-2 [&>ul]:list-disc [&>ul]:pl-5 [&>ol]:list-decimal [&>ol]:pl-5" /> 
-                : <div className="whitespace-pre-wrap">{p.description ?? "A piece from the Klynn collection. Hand-thrown, glazed by hand, and fired slowly."}</div>
-              )}
-              {tab === "materials" && <div className="whitespace-pre-wrap">{p.materials ?? "Local stoneware clay, lead-free matte glaze."}</div>}
-              {tab === "care" && <div className="whitespace-pre-wrap">{p.care ?? "Dishwasher safe. Avoid sudden temperature changes."}</div>}
+            <div className="mt-5 text-sm leading-relaxed text-foreground/90 min-h-[6rem] relative">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={tab}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {tab === "desc" && (
+                    p.descriptionHtml ? 
+                      <div dangerouslySetInnerHTML={{ __html: p.descriptionHtml }} className="space-y-2 [&>p]:mb-2 [&>ul]:list-disc [&>ul]:pl-5 [&>ol]:list-decimal [&>ol]:pl-5" /> 
+                    : <div className="whitespace-pre-wrap">{p.description ?? "A piece from the Klynn collection. Hand-thrown, glazed by hand, and fired slowly."}</div>
+                  )}
+                  {tab === "materials" && <div className="whitespace-pre-wrap">{p.materials ?? "Local stoneware clay, lead-free matte glaze."}</div>}
+                  {tab === "care" && <div className="whitespace-pre-wrap">{p.care ?? "Dishwasher safe. Avoid sudden temperature changes."}</div>}
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>
@@ -124,10 +145,16 @@ function PDP() {
 
       {related.length > 0 && (
         <section className="mt-32">
-          <div className="container-editorial mb-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.6 }}
+            className="container-editorial mb-10"
+          >
             <p className="eyebrow">You may also like</p>
             <h2 className="serif text-3xl md:text-5xl mt-3">More from {p.category}.</h2>
-          </div>
+          </motion.div>
           <div className="overflow-x-auto">
             <div className="flex gap-6 md:gap-10 px-6 md:px-10 pb-4 min-w-max">
               {related.map((r) => (

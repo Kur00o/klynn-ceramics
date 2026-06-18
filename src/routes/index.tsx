@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo } from "react";
 import { ArrowDown, ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 import hero from "@/assets/hero.png";
 import process from "@/assets/process.jpg";
 import ugc1 from "@/assets/ugc1.jpg";
@@ -53,7 +54,12 @@ function Home() {
         />
         <div className="absolute inset-0 bg-charcoal/40 bg-gradient-to-b from-charcoal/30 via-transparent to-charcoal/70" />
         <div className="relative z-10 h-full container-editorial flex flex-col justify-end pb-20 md:pb-28">
-          <div className="max-w-3xl fade-in">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-3xl"
+          >
             <p className="eyebrow text-parchment/85">Klynn Ceramics</p>
             <h1 className="serif text-parchment mt-6 text-[2.6rem] sm:text-6xl md:text-7xl lg:text-[5.5rem] leading-[0.98]">
               Born from clay.
@@ -70,7 +76,7 @@ function Home() {
                 Our Story
               </a>
             </div>
-          </div>
+          </motion.div>
         </div>
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 scroll-hint text-parchment/80">
           <ArrowDown className="w-4 h-4" strokeWidth={1.4} />
@@ -79,7 +85,13 @@ function Home() {
 
       {/* FEATURED */}
       <section className="container-editorial pt-28 md:pt-36">
-        <div className="flex items-end justify-between mb-14 flex-wrap gap-6">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex items-end justify-between mb-14 flex-wrap gap-6"
+        >
           <div>
             <p className="eyebrow">Featured</p>
             <h2 className="serif text-4xl md:text-6xl mt-3">A small, considered edit.</h2>
@@ -87,7 +99,7 @@ function Home() {
           <Link to="/bowls" className="link-underline text-[0.78rem] tracking-[0.22em] uppercase">
             Shop all <ArrowRight className="inline w-3.5 h-3.5 ml-1" strokeWidth={1.4} />
           </Link>
-        </div>
+        </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10">
           {isLoading ? (
             <div className="col-span-12 py-20 text-center text-muted-foreground">Loading products...</div>
@@ -111,12 +123,18 @@ function Home() {
 
       {/* BESTSELLERS */}
       <section className="mt-32 md:mt-44">
-        <div className="container-editorial flex items-end justify-between mb-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="container-editorial flex items-end justify-between mb-10"
+        >
           <div>
             <p className="eyebrow">Bestsellers</p>
             <h2 className="serif text-4xl md:text-6xl mt-3">Lived with, loved daily.</h2>
           </div>
-        </div>
+        </motion.div>
         <div className="overflow-x-auto no-scrollbar">
           <div className="flex gap-6 md:gap-10 px-6 md:px-10 pb-4 min-w-max">
             {isLoading ? (
@@ -134,7 +152,13 @@ function Home() {
 
       {/* ABOUT US */}
       <section id="story" className="mt-32 md:mt-44 bg-secondary py-28 md:py-40">
-        <div className="container-editorial max-w-4xl text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="container-editorial max-w-4xl text-center"
+        >
           <p className="eyebrow">About us</p>
           <h2 className="serif text-3xl md:text-5xl leading-[1.2] mt-8 text-foreground">
             Founded in 2026 by Khushi Parmar, Klynn Ceramics is a ceramic tableware company based in Phursungi, Pune, India.
@@ -154,25 +178,40 @@ function Home() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* CATEGORY TILES */}
       <section className="container-editorial mt-32 md:mt-44">
-        <p className="eyebrow">Collections</p>
-        <h2 className="serif text-4xl md:text-6xl mt-3 mb-14">The whole table.</h2>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <p className="eyebrow">Collections</p>
+          <h2 className="serif text-4xl md:text-6xl mt-3 mb-14">The whole table.</h2>
+        </motion.div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
-          {(["bowls","plates","mugs","gifting"] as const).map((k) => {
+          {(["bowls","plates","mugs","gifting"] as const).map((k, i) => {
             const m = categoryMeta[k];
             return (
-              <Link key={k} to={m.href} className="group relative aspect-[3/4] overflow-hidden bg-secondary block">
-                <img src={m.image} alt={m.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105" />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/65 via-transparent to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-5 md:p-7 text-parchment">
-                  <h3 className="serif text-2xl md:text-3xl">{m.title}</h3>
-                  <p className="text-xs text-parchment/75 mt-1">{m.tagline}</p>
-                </div>
-              </Link>
+              <motion.div
+                key={k}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-5%" }}
+                transition={{ duration: 0.5, delay: i * 0.1, ease: "easeOut" }}
+              >
+                <Link to={m.href} className="group relative aspect-[3/4] overflow-hidden bg-secondary block">
+                  <img src={m.image} alt={m.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/65 via-transparent to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-5 md:p-7 text-parchment">
+                    <h3 className="serif text-2xl md:text-3xl">{m.title}</h3>
+                    <p className="text-xs text-parchment/75 mt-1">{m.tagline}</p>
+                  </div>
+                </Link>
+              </motion.div>
             );
           })}
         </div>
@@ -180,22 +219,40 @@ function Home() {
 
       {/* QUOTE */}
       <section className="container-editorial mt-32 md:mt-44 border-y border-border py-20 text-center">
-        <div className="max-w-3xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-3xl mx-auto"
+        >
           <blockquote className="serif text-3xl md:text-5xl leading-tight text-foreground/90">
             "Have nothing in your house that you do not know to be useful, or believe to be beautiful."
           </blockquote>
           <p className="mt-8 text-sm uppercase tracking-[0.2em] text-muted-foreground">
             — William Morris
           </p>
-        </div>
+        </motion.div>
       </section>
 
       {/* MATERIAL STORY */}
       <section className="container-editorial mt-32 md:mt-44 grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-        <div className="aspect-[4/5] overflow-hidden bg-secondary">
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="aspect-[4/5] overflow-hidden bg-secondary"
+        >
           <img src={process} alt="Hands shaping wet clay on a potter's wheel" loading="lazy" className="w-full h-full object-cover" />
-        </div>
-        <div className="md:pr-10">
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="md:pr-10"
+        >
           <p className="eyebrow">Material</p>
           <h2 className="serif text-4xl md:text-6xl mt-3 leading-[1.05]">The Strength Behind Every Collection</h2>
           <p className="mt-7 text-muted-foreground leading-relaxed font-medium">
@@ -207,23 +264,36 @@ function Home() {
           <Link to="/contact" className="link-underline mt-10 inline-block text-[0.78rem] tracking-[0.22em] uppercase">
             Get in touch <ArrowRight className="inline w-3.5 h-3.5 ml-1" strokeWidth={1.4} />
           </Link>
-        </div>
+        </motion.div>
       </section>
 
       {/* UGC */}
       <section className="container-editorial mt-32 md:mt-44">
-        <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex items-end justify-between mb-10 flex-wrap gap-4"
+        >
           <div>
             <p className="eyebrow">At Home</p>
             <h2 className="serif text-4xl md:text-6xl mt-3">In real rooms, real lives.</h2>
           </div>
           <span className="text-sm text-muted-foreground">@klynn.ceramics</span>
-        </div>
+        </motion.div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
           {[ugc1, ugc2, ugc3, ugc1, ugc3, ugc2].map((src, i) => (
-            <div key={i} className="aspect-square overflow-hidden bg-secondary">
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-5%" }}
+              transition={{ duration: 0.5, delay: i * 0.05, ease: "easeOut" }}
+              className="aspect-square overflow-hidden bg-secondary"
+            >
               <img src={src} alt="Customer photo of ceramics in a home" loading="lazy" className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105" />
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>

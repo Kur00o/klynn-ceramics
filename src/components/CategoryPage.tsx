@@ -2,6 +2,7 @@ import { useState, useMemo } from "react";
 import { ProductCard } from "./ProductCard";
 import type { Category } from "@/data/products";
 import { useProducts } from "@/api/products";
+import { motion } from "framer-motion";
 
 type Sort = "new" | "best" | "low" | "high";
 
@@ -40,28 +41,50 @@ export function CategoryPage({
   return (
     <div className="pt-28 md:pt-36">
       {hero && (
-        <div className="relative h-[55vh] min-h-[380px] w-full overflow-hidden mb-20">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative h-[55vh] min-h-[380px] w-full overflow-hidden mb-20"
+        >
           <img src={hero} alt={title} className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-charcoal/40 bg-gradient-to-b from-charcoal/20 via-transparent to-charcoal/70" />
           <div className="absolute inset-0 flex items-end">
-            <div className="container-editorial pb-12">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="container-editorial pb-12"
+            >
               <p className="eyebrow text-parchment/80">Collection</p>
               <h1 className="serif text-5xl md:text-7xl text-parchment mt-3">{title}</h1>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       )}
 
       <section className="container-editorial">
         {!hero && (
-          <header className="max-w-2xl mb-14 fade-in">
+          <motion.header 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="max-w-2xl mb-14"
+          >
             <p className="eyebrow">Collection</p>
             <h1 className="serif text-5xl md:text-7xl mt-4">{title}</h1>
             <p className="text-base md:text-lg text-muted-foreground mt-6 leading-relaxed">{intro}</p>
-          </header>
+          </motion.header>
         )}
         {hero && (
-          <p className="max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed mb-14">{intro}</p>
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="max-w-2xl text-base md:text-lg text-muted-foreground leading-relaxed mb-14"
+          >
+            {intro}
+          </motion.p>
         )}
 
         <div className="flex flex-col md:flex-row md:items-center justify-between border-y border-border py-4 mb-12 gap-4">
