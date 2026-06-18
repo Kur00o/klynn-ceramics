@@ -38,10 +38,13 @@ export function Footer() {
                 <span>klynnceramics@gmail.com</span>
               </a>
             </li>
+            <li>
+              <a href="https://instagram.com/klynn.ceramics" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:text-primary transition-colors group">
+                <Instagram className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" strokeWidth={1.4} />
+                <span>@klynn.ceramics</span>
+              </a>
+            </li>
           </ul>
-          <div className="flex gap-4 mt-6 text-foreground/70">
-            <a href="https://instagram.com/klynn.ceramics" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-primary transition-colors"><Instagram className="w-4 h-4" strokeWidth={1.4} /></a>
-          </div>
         </div>
       </div>
       <div className="border-t border-border">
