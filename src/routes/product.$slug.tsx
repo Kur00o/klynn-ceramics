@@ -32,8 +32,14 @@ function PDP() {
   const p = Route.useLoaderData() as Product;
   const { add } = useCart();
   const [tab, setTab] = useState<"desc" | "materials" | "care">("desc");
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { data: allProducts = [] } = useProducts();
   const related = allProducts.filter((x) => x.category === p.category && x.slug !== p.slug);
+
+  const allImages = Array.from(new Set(p.images && p.images.length > 0 ? p.images : [p.image]));
+
+  const nextImage = () => setCurrentImageIndex((i) => (i + 1) % allImages.length);
+  const prevImage = () => setCurrentImageIndex((i) => (i - 1 + allImages.length) % allImages.length);
 
   return (
     <div className="pt-28 md:pt-36">
@@ -47,15 +53,41 @@ function PDP() {
       </div>
       <section className="container-editorial mt-8 grid md:grid-cols-2 gap-10 md:gap-20">
         <div className="space-y-4">
-          <div className="aspect-square overflow-hidden bg-secondary">
-            <img src={p.image} alt={p.alt} className="w-full h-full object-cover" />
+          <div className="relative aspect-square overflow-hidden bg-secondary group">
+            <img 
+              src={allImages[currentImageIndex]} 
+              alt={p.alt} 
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+            />
+            {allImages.length > 1 && (
+              <>
+                <button 
+                  onClick={prevImage}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-black p-2 rounded-full shadow-md transition-all opacity-0 group-hover:opacity-100"
+                  aria-label="Previous image"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                </button>
+                <button 
+                  onClick={nextImage}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-black p-2 rounded-full shadow-md transition-all opacity-0 group-hover:opacity-100"
+                  aria-label="Next image"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                </button>
+              </>
+            )}
           </div>
-          {p.images && p.images.length > 1 && (
-            <div className="grid grid-cols-3 gap-4">
-              {p.images.slice(1, 4).map((src, i) => (
-                <div key={i} className="aspect-square overflow-hidden bg-secondary">
-                  <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
-                </div>
+          {allImages.length > 1 && (
+            <div className="grid grid-cols-4 gap-4">
+              {allImages.map((src, i) => (
+                <button 
+                  key={i} 
+                  onClick={() => setCurrentImageIndex(i)} 
+                  className={`relative aspect-square overflow-hidden bg-secondary group focus:outline-none ${i === currentImageIndex ? 'ring-1 ring-primary ring-offset-1' : 'opacity-70 hover:opacity-100'}`}
+                >
+                  <img src={src} alt="" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy" />
+                </button>
               ))}
             </div>
           )}
