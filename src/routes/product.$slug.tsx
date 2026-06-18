@@ -155,8 +155,8 @@ function PDP() {
             <p className="eyebrow">You may also like</p>
             <h2 className="serif text-3xl md:text-5xl mt-3">More from {p.category}.</h2>
           </motion.div>
-          <div className="overflow-x-auto no-scrollbar">
-            <div className="flex gap-6 md:gap-10 scroll-pl pr-6 md:pr-10 pb-4 min-w-max">
+          <div className="overflow-x-auto no-scrollbar pb-4">
+            <div className="flex gap-6 md:gap-10 scroll-pl pr-6 md:pr-10 min-w-max">
               {related.map((r) => (
                 <div key={r.slug} className="w-72 md:w-96 shrink-0">
                   <ProductCard p={r} />

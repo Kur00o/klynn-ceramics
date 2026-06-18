@@ -129,6 +129,14 @@
     .scroll-pl { padding-left: max(2.5rem, calc((100vw - 1320px) / 2 + 2.5rem)); }
   }
 
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
   .eyebrow {
     font-size: 0.7rem;
     letter-spacing: 0.28em;

@@ -135,8 +135,8 @@ function Home() {
             <h2 className="serif text-4xl md:text-6xl mt-3">Lived with, loved daily.</h2>
           </div>
         </motion.div>
-        <div className="overflow-x-auto no-scrollbar">
-          <div className="flex gap-6 md:gap-10 scroll-pl pr-6 md:pr-10 pb-4 min-w-max">
+        <div className="overflow-x-auto no-scrollbar pb-4">
+          <div className="flex gap-6 md:gap-10 scroll-pl pr-6 md:pr-10 min-w-max">
             {isLoading ? (
               <div className="w-full py-10 text-center text-muted-foreground">Loading bestsellers...</div>
             ) : (
