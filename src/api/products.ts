@@ -42,8 +42,9 @@ const mapShopifyProduct = (shopifyProduct: any): Product & { shopifyId: string; 
     bestseller,
     newArrival,
     description: shopifyProduct.description,
-    materials: "Stoneware", 
-    care: "Dishwasher safe", 
+    descriptionHtml: shopifyProduct.descriptionHtml,
+    materials: shopifyProduct.materials?.value || "Stoneware", 
+    care: shopifyProduct.care?.value || "Dishwasher safe", 
     images: allImages.length > 0 ? allImages : [image, image, image, image],
     shopifyId: shopifyProduct.id,
     shopifyVariants: shopifyProduct.variants?.edges?.map((e: any) => e.node) || []

@@ -110,9 +110,13 @@ function PDP() {
               ))}
             </div>
             <div className="mt-5 text-sm leading-relaxed text-foreground/90 min-h-[6rem]">
-              {tab === "desc" && (p.description ?? "A piece from the Klynn collection. Hand-thrown, glazed by hand, and fired slowly.")}
-              {tab === "materials" && (p.materials ?? "Local stoneware clay, lead-free matte glaze.")}
-              {tab === "care" && (p.care ?? "Dishwasher safe. Avoid sudden temperature changes.")}
+              {tab === "desc" && (
+                p.descriptionHtml ? 
+                  <div dangerouslySetInnerHTML={{ __html: p.descriptionHtml }} className="space-y-2 [&>p]:mb-2 [&>ul]:list-disc [&>ul]:pl-5 [&>ol]:list-decimal [&>ol]:pl-5" /> 
+                : <div className="whitespace-pre-wrap">{p.description ?? "A piece from the Klynn collection. Hand-thrown, glazed by hand, and fired slowly."}</div>
+              )}
+              {tab === "materials" && <div className="whitespace-pre-wrap">{p.materials ?? "Local stoneware clay, lead-free matte glaze."}</div>}
+              {tab === "care" && <div className="whitespace-pre-wrap">{p.care ?? "Dishwasher safe. Avoid sudden temperature changes."}</div>}
             </div>
           </div>
         </div>

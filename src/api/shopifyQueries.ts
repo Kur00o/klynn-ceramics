@@ -7,6 +7,13 @@ export const getProductsQuery = `
           handle
           title
           description
+          descriptionHtml
+          materials: metafield(namespace: "custom", key: "materials") {
+            value
+          }
+          care: metafield(namespace: "custom", key: "care") {
+            value
+          }
           availableForSale
           priceRange {
             minVariantPrice {
@@ -62,6 +69,13 @@ export const getProductByHandleQuery = `
       handle
       title
       description
+      descriptionHtml
+      materials: metafield(namespace: "custom", key: "materials") {
+        value
+      }
+      care: metafield(namespace: "custom", key: "care") {
+        value
+      }
       availableForSale
       priceRange {
         minVariantPrice {
