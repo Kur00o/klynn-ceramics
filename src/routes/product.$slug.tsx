@@ -140,7 +140,7 @@ function PDP() {
               </AnimatePresence>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {related.length > 0 && (
