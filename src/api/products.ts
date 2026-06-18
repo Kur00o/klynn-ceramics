@@ -26,6 +26,11 @@ const mapShopifyProduct = (shopifyProduct: any): Product & { shopifyId: string; 
   const bestseller = tags.includes('bestseller');
   const newArrival = tags.includes('newArrival');
   
+  const allImages = shopifyProduct.images?.edges?.map((e: any) => e.node?.url).filter(Boolean) || [];
+  if (shopifyProduct.featuredImage?.url && !allImages.includes(shopifyProduct.featuredImage.url)) {
+    allImages.unshift(shopifyProduct.featuredImage.url);
+  }
+
   return {
     slug: shopifyProduct.handle,
     name: shopifyProduct.title,
@@ -39,6 +44,7 @@ const mapShopifyProduct = (shopifyProduct: any): Product & { shopifyId: string; 
     description: shopifyProduct.description,
     materials: "Stoneware", 
     care: "Dishwasher safe", 
+    images: allImages.length > 0 ? allImages : [image, image, image, image],
     shopifyId: shopifyProduct.id,
     shopifyVariants: shopifyProduct.variants?.edges?.map((e: any) => e.node) || []
   };

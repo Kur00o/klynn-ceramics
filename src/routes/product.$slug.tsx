@@ -50,13 +50,15 @@ function PDP() {
           <div className="aspect-square overflow-hidden bg-secondary">
             <img src={p.image} alt={p.alt} className="w-full h-full object-cover" />
           </div>
-          <div className="grid grid-cols-3 gap-4">
-            {[p.image, p.image, p.image].map((src, i) => (
-              <div key={i} className="aspect-square overflow-hidden bg-secondary">
-                <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
-              </div>
-            ))}
-          </div>
+          {p.images && p.images.length > 1 && (
+            <div className="grid grid-cols-3 gap-4">
+              {p.images.slice(1, 4).map((src, i) => (
+                <div key={i} className="aspect-square overflow-hidden bg-secondary">
+                  <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="md:pt-6 md:sticky md:top-28 md:self-start">

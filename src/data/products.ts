@@ -22,6 +22,7 @@ export type Product = {
   materials?: string;
   care?: string;
   description?: string;
+  images?: string[];
 };
 
 export const fallbackProducts: Product[] = [
