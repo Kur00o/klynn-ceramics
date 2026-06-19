@@ -4,9 +4,7 @@ import { ArrowDown, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import hero from "@/assets/hero.png";
 import process from "@/assets/process.jpg";
-import ugc1 from "@/assets/ugc1.jpg";
-import ugc2 from "@/assets/ugc2.jpg";
-import ugc3 from "@/assets/ugc3.jpg";
+
 import { categoryMeta } from "@/data/products";
 import { useProducts } from "@/api/products";
 import { ProductCard } from "@/components/ProductCard";
@@ -283,7 +281,7 @@ function Home() {
           <span className="text-sm text-muted-foreground">@klynn.ceramics</span>
         </motion.div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
-          {[ugc1, ugc2, ugc3, ugc1, ugc3, ugc2].map((src, i) => (
+          {['/1.PNG', '/2.PNG', '/3.PNG', '/4.PNG', '/5.PNG', '/6.PNG'].map((src, i) => (
             <motion.div 
               key={i} 
               initial={{ opacity: 0, y: 20 }}
