@@ -13,27 +13,23 @@ const mapShopifyProduct = (shopifyProduct: any): Product & { shopifyId: string; 
   // Try to map from collections first
   const collectionTitles: string[] = (shopifyProduct.collections?.edges || []).map((e: any) => e.node.title.toLowerCase());
   let category: Category | null = null;
-  if (collectionTitles.some(t => t.includes("bowl"))) category = "bowls";
+  
+  // Prioritize gifting sets, as a set might also be in the 'bowls' or 'plates' collection
+  if (collectionTitles.some(t => t.includes("gift") || t.includes("set"))) category = "gifting";
+  else if (collectionTitles.some(t => t.includes("bowl"))) category = "bowls";
   else if (collectionTitles.some(t => t.includes("plate"))) category = "plates";
   else if (collectionTitles.some(t => t.includes("mug"))) category = "mugs";
-  else if (collectionTitles.some(t => t.includes("gift") || t.includes("set"))) category = "gifting";
   else {
-    // Fallback to tags if collection doesn't match
+    // Fallback to explicit tags if collection doesn't match
     const categoryTag = tags.find(t => t.startsWith('category:'))?.replace('category:', '') as Category;
     if (categoryTag && ["bowls", "plates", "mugs", "gifting"].includes(categoryTag)) {
       category = categoryTag;
     }
   }
 
-  // Final fallback based on product type or title
-  if (!category) {
-    const typeOrTitle = `${shopifyProduct.productType} ${shopifyProduct.title}`.toLowerCase();
-    if (typeOrTitle.includes("bowl")) category = "bowls";
-    else if (typeOrTitle.includes("plate")) category = "plates";
-    else if (typeOrTitle.includes("mug")) category = "mugs";
-    else if (typeOrTitle.includes("set") || typeOrTitle.includes("gift")) category = "gifting";
-    else return null as any; // Ignore products that don't fit any category
-  }
+  // If no explicit collection or category tag matches, ignore the product to prevent 
+  // pulling in unrelated store products based purely on their title.
+  if (!category) return null as any;
   
   const bestseller = tags.includes('bestseller');
   const newArrival = tags.includes('newArrival');
