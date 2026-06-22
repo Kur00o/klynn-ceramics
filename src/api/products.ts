@@ -12,15 +12,27 @@ const mapShopifyProduct = (shopifyProduct: any): Product & { shopifyId: string; 
   
   // Try to map from collections first
   const collectionTitles: string[] = (shopifyProduct.collections?.edges || []).map((e: any) => e.node.title.toLowerCase());
-  let category: Category = "bowls";
+  let category: Category | null = null;
   if (collectionTitles.some(t => t.includes("bowl"))) category = "bowls";
   else if (collectionTitles.some(t => t.includes("plate"))) category = "plates";
   else if (collectionTitles.some(t => t.includes("mug"))) category = "mugs";
-  else if (collectionTitles.some(t => t.includes("gift"))) category = "gifting";
+  else if (collectionTitles.some(t => t.includes("gift") || t.includes("set"))) category = "gifting";
   else {
     // Fallback to tags if collection doesn't match
     const categoryTag = tags.find(t => t.startsWith('category:'))?.replace('category:', '') as Category;
-    if (categoryTag) category = categoryTag;
+    if (categoryTag && ["bowls", "plates", "mugs", "gifting"].includes(categoryTag)) {
+      category = categoryTag;
+    }
+  }
+
+  // Final fallback based on product type or title
+  if (!category) {
+    const typeOrTitle = `${shopifyProduct.productType} ${shopifyProduct.title}`.toLowerCase();
+    if (typeOrTitle.includes("bowl")) category = "bowls";
+    else if (typeOrTitle.includes("plate")) category = "plates";
+    else if (typeOrTitle.includes("mug")) category = "mugs";
+    else if (typeOrTitle.includes("set") || typeOrTitle.includes("gift")) category = "gifting";
+    else return null as any; // Ignore products that don't fit any category
   }
   
   const bestseller = tags.includes('bestseller');
@@ -58,7 +70,7 @@ export async function fetchProducts() {
       variables: { first: 250 }
     });
     const edges = res.body.data.products.edges;
-    return edges.map((e: any) => mapShopifyProduct(e.node));
+    return edges.map((e: any) => mapShopifyProduct(e.node)).filter(Boolean) as Product[];
   } catch (err) {
     console.warn("Falling back to mock products", err);
     return fallbackProducts;
@@ -79,7 +91,8 @@ export async function fetchProduct(slug: string) {
       variables: { handle: slug }
     });
     if (res.body.data.product) {
-      return mapShopifyProduct(res.body.data.product);
+      const p = mapShopifyProduct(res.body.data.product);
+      if (p) return p;
     }
     throw new Error("Product not found");
   } catch (err) {
