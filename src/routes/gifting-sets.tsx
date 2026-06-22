@@ -65,7 +65,7 @@ function GiftingPage() {
                   <h2 className="serif text-4xl md:text-5xl mt-4">{p.name}</h2>
                   <p className="text-muted-foreground mt-4">{p.descriptor}</p>
                   <p className="mt-6 leading-relaxed text-foreground/90 max-w-md">
-                    {p.description ?? "A considered pairing of pieces from across the collection, hand-finished in matching tones."}
+                    {p.description || "A considered pairing of pieces from across the collection, hand-finished in matching tones."}
                   </p>
 
                   <div className="mt-8 flex flex-wrap gap-2">

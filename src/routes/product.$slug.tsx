@@ -132,10 +132,10 @@ function PDP() {
                   {tab === "desc" && (
                     p.descriptionHtml ? 
                       <div dangerouslySetInnerHTML={{ __html: p.descriptionHtml }} className="space-y-2 [&>p]:mb-2 [&>ul]:list-disc [&>ul]:pl-5 [&>ol]:list-decimal [&>ol]:pl-5" /> 
-                    : <div className="whitespace-pre-wrap">{p.description ?? "A piece from the Klynn collection. Hand-thrown, glazed by hand, and fired slowly."}</div>
+                    : <div className="whitespace-pre-wrap">{p.description || "A piece from the Klynn collection. Hand-thrown, glazed by hand, and fired slowly."}</div>
                   )}
-                  {tab === "materials" && <div className="whitespace-pre-wrap">{p.materials ?? "Local stoneware clay, lead-free matte glaze."}</div>}
-                  {tab === "care" && <div className="whitespace-pre-wrap">{p.care ?? "Dishwasher safe. Avoid sudden temperature changes."}</div>}
+                  {tab === "materials" && <div className="whitespace-pre-wrap">{p.materials || "Local stoneware clay, lead-free matte glaze."}</div>}
+                  {tab === "care" && <div className="whitespace-pre-wrap">{p.care || "Dishwasher safe. Avoid sudden temperature changes."}</div>}
                 </motion.div>
               </AnimatePresence>
             </div>

@@ -34,7 +34,7 @@ const mapShopifyProduct = (shopifyProduct: any): Product & { shopifyId: string; 
   return {
     slug: shopifyProduct.handle,
     name: shopifyProduct.title,
-    descriptor: shopifyProduct.productType || shopifyProduct.title,
+    descriptor: shopifyProduct.seo?.description || shopifyProduct.productType || shopifyProduct.title,
     price: Math.round(price),
     image,
     alt,

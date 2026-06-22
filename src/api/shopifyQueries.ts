@@ -8,6 +8,9 @@ export const getProductsQuery = `
           title
           description
           descriptionHtml
+          seo {
+            description
+          }
           materials: metafield(namespace: "custom", key: "materials") {
             value
           }
@@ -70,6 +73,9 @@ export const getProductByHandleQuery = `
       title
       description
       descriptionHtml
+      seo {
+        description
+      }
       materials: metafield(namespace: "custom", key: "materials") {
         value
       }
