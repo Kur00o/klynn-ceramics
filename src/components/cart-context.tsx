@@ -3,16 +3,16 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { Product } from "@/data/products";
 import { createCart, getCart, addToCart, removeFromCart, updateCart } from "@/api/cart";
 
-type Item = { product: Product; qty: number; lineId: string };
+type Item = { product: Product; qty: number; lineId: string; variantId?: string };
 type CartCtx = {
   items: Item[];
   count: number;
   total: number;
   open: boolean;
   setOpen: (v: boolean) => void;
-  add: (p: Product) => void;
-  remove: (slug: string) => void;
-  update: (slug: string, qty: number) => void;
+  add: (p: Product, variantId?: string) => void;
+  remove: (lineId: string) => void;
+  update: (lineId: string, qty: number) => void;
   checkoutUrl?: string;
   isUpdating: boolean;
 };
@@ -71,12 +71,12 @@ export function CartProvider({ children }: { children: ReactNode }) {
       // We reconstruct enough of the Product type for the CartDrawer to work
       const p: Partial<Product> = {
         slug: prod.handle,
-        name: prod.title,
+        name: merch.title && merch.title !== "Default Title" ? `${prod.title} - ${merch.title}` : prod.title,
         price: parseFloat(merch.price.amount),
         image: prod.featuredImage?.url || prod.images?.edges?.[0]?.node?.url || "",
         alt: prod.featuredImage?.altText || prod.images?.edges?.[0]?.node?.altText || prod.title
       };
-      return { product: p as Product, qty: node.quantity, lineId: node.id };
+      return { product: p as Product, qty: node.quantity, lineId: node.id, variantId: merch.id };
     });
   }, [cartData]);
 
@@ -90,16 +90,16 @@ export function CartProvider({ children }: { children: ReactNode }) {
       ? cartData.checkoutUrl.replace("checkout.klynnceramics.com", "klynn-ceramics.myshopify.com")
       : undefined,
     isUpdating: createCartMut.isPending || addMut.isPending || removeMut.isPending || updateMut.isPending,
-    add: async (p) => {
+    add: async (p, variantId) => {
       // Find variant ID. Since we attached it to the product object during mapping, we use it. 
       // If it's missing (fallback data), we can't reliably add to Shopify cart, but we'll try.
-      const variantId = (p as any).shopifyVariants?.[0]?.id;
-      if (!variantId) {
+      const resolvedVariantId = variantId || p.shopifyVariants?.[0]?.id;
+      if (!resolvedVariantId) {
         console.warn("No variant ID found for product", p.slug);
         return;
       } 
 
-      const existing = items.find((i) => i.product.slug === p.slug);
+      const existing = items.find((i) => i.variantId === resolvedVariantId);
       let activeCartId = cartId;
 
       if (!activeCartId) {
@@ -111,21 +111,17 @@ export function CartProvider({ children }: { children: ReactNode }) {
         updateMut.mutate({ cId: activeCartId, lineId: existing.lineId, quantity: existing.qty + 1 });
         setOpen(true);
       } else {
-        addMut.mutate({ cId: activeCartId, variantId });
+        addMut.mutate({ cId: activeCartId, variantId: resolvedVariantId });
       }
     },
-    remove: (slug) => {
+    remove: (lineId) => {
       if (!cartId) return;
-      const line = items.find(i => i.product.slug === slug);
-      if (line) removeMut.mutate({ cId: cartId, lineId: line.lineId });
+      removeMut.mutate({ cId: cartId, lineId });
     },
-    update: (slug, qty) => {
+    update: (lineId, qty) => {
       if (!cartId) return;
-      const line = items.find(i => i.product.slug === slug);
-      if (line) {
-        if (qty <= 0) removeMut.mutate({ cId: cartId, lineId: line.lineId });
-        else updateMut.mutate({ cId: cartId, lineId: line.lineId, quantity: qty });
-      }
+      if (qty <= 0) removeMut.mutate({ cId: cartId, lineId });
+      else updateMut.mutate({ cId: cartId, lineId, quantity: qty });
     },
   }), [items, open, cartId, cartData, createCartMut.isPending, addMut.isPending, removeMut.isPending, updateMut.isPending]);
 

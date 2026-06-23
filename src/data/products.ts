@@ -24,6 +24,8 @@ export type Product = {
   description?: string;
   descriptionHtml?: string;
   images?: string[];
+  shopifyId?: string;
+  shopifyVariants?: any[];
 };
 
 export const fallbackProducts: Product[] = [

@@ -3,7 +3,7 @@ import { type Product } from "@/data/products";
 import { fetchProduct, useProducts } from "@/api/products";
 import { ProductCard } from "@/components/ProductCard";
 import { useCart } from "@/components/cart-context";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/product/$slug")({
@@ -36,6 +36,23 @@ function PDP() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const { data: allProducts = [] } = useProducts();
   const related = allProducts.filter((x) => x.category === p.category && x.slug !== p.slug);
+
+  const variants = p.shopifyVariants?.filter(v => v.title !== "Default Title") || [];
+  const hasVariants = variants.length > 0;
+  const [selectedVariantId, setSelectedVariantId] = useState<string | undefined>(hasVariants ? variants[0]?.id : undefined);
+  
+  const selectedVariant = p.shopifyVariants?.find(v => v.id === selectedVariantId) || p.shopifyVariants?.[0];
+  const displayPrice = selectedVariant?.price?.amount ? Math.round(parseFloat(selectedVariant.price.amount)) : p.price;
+
+  useEffect(() => {
+    if (p.shopifyVariants) {
+      const v = p.shopifyVariants.filter(v => v.title !== "Default Title");
+      if (v.length > 0) setSelectedVariantId(v[0].id);
+      else setSelectedVariantId(undefined);
+    } else {
+      setSelectedVariantId(undefined);
+    }
+  }, [p.slug, p.shopifyVariants]);
 
   const allImages = Array.from(new Set(p.images && p.images.length > 0 ? p.images : [p.image]));
 
@@ -108,9 +125,36 @@ function PDP() {
           <p className="eyebrow">{p.category}</p>
           <h1 className="serif text-4xl md:text-6xl mt-4 leading-[1.05]">{p.name}</h1>
           <p className="text-muted-foreground mt-3">{p.descriptor}</p>
-          <p className="serif text-3xl mt-8">₹{p.price}</p>
+          <p className="serif text-3xl mt-8">₹{displayPrice}</p>
 
-          <button onClick={() => add(p)} className="btn-primary mt-8 w-full md:w-auto">Add to cart</button>
+          {hasVariants && (
+            <div className="mt-8">
+              <p className="text-sm font-medium mb-3">Color</p>
+              <div className="flex flex-wrap gap-3">
+                {variants.map((v) => (
+                  <button
+                    key={v.id}
+                    onClick={() => setSelectedVariantId(v.id)}
+                    className={`px-5 py-2.5 border text-sm transition-colors ${
+                      selectedVariantId === v.id
+                        ? "border-primary bg-primary text-primary-foreground"
+                        : "border-border text-foreground hover:border-foreground/50"
+                    } ${!v.availableForSale ? "opacity-50 cursor-not-allowed" : ""}`}
+                    disabled={!v.availableForSale}
+                  >
+                    {v.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <button 
+            onClick={() => add(p, selectedVariantId)} 
+            className="btn-primary mt-8 w-full md:w-auto"
+          >
+            Add to cart
+          </button>
 
           <div className="mt-12 border-t border-border">
             <div className="flex gap-8 pt-5 text-[0.72rem] tracking-[0.22em] uppercase">

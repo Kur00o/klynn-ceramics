@@ -27,13 +27,13 @@ export function CartDrawer() {
             <p className="text-sm text-muted-foreground">Your cart is empty. The good ones take time to find.</p>
           ) : (
             items.map((i) => (
-              <div key={i.product.slug} className={`flex gap-4 ${isUpdating ? "opacity-50" : ""}`}>
+              <div key={i.lineId} className={`flex gap-4 ${isUpdating ? "opacity-50" : ""}`}>
                 <img src={i.product.image} alt={i.product.alt} className="w-20 h-20 object-cover" />
                 <div className="flex-1">
                   <p className="serif text-lg leading-tight">{i.product.name}</p>
                   <div className="flex items-center gap-3 mt-2 border border-border w-fit px-2 py-1 rounded-sm">
                     <button 
-                      onClick={() => update(i.product.slug, i.qty - 1)}
+                      onClick={() => update(i.lineId, i.qty - 1)}
                       disabled={isUpdating}
                       className="text-muted-foreground hover:text-foreground px-1 disabled:opacity-50"
                     >
@@ -41,7 +41,7 @@ export function CartDrawer() {
                     </button>
                     <span className="text-xs w-4 text-center">{i.qty}</span>
                     <button 
-                      onClick={() => update(i.product.slug, i.qty + 1)}
+                      onClick={() => update(i.lineId, i.qty + 1)}
                       disabled={isUpdating}
                       className="text-muted-foreground hover:text-foreground px-1 disabled:opacity-50"
                     >
@@ -49,7 +49,7 @@ export function CartDrawer() {
                     </button>
                   </div>
                   <button
-                    onClick={() => remove(i.product.slug)}
+                    onClick={() => remove(i.lineId)}
                     disabled={isUpdating}
                     className="mt-2 text-[0.7rem] tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition-colors disabled:opacity-50"
                   >
