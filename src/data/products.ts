@@ -9,6 +9,20 @@ import catGifting from "@/assets/cat-gifting.jpg";
 
 export type Category = "bowls" | "plates" | "mugs" | "gifting";
 
+export type ProductVariant = {
+  id: string;
+  title: string;
+  availableForSale: boolean;
+  price: {
+    amount: string;
+    currencyCode: string;
+  };
+  image?: {
+    url: string;
+    altText: string;
+  };
+};
+
 export type Product = {
   slug: string;
   name: string;
@@ -25,7 +39,7 @@ export type Product = {
   descriptionHtml?: string;
   images?: string[];
   shopifyId?: string;
-  shopifyVariants?: any[];
+  shopifyVariants?: ProductVariant[];
 };
 
 export const fallbackProducts: Product[] = [

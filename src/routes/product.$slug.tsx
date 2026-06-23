@@ -134,8 +134,14 @@ function PDP() {
                 {variants.map((v) => (
                   <button
                     key={v.id}
-                    onClick={() => setSelectedVariantId(v.id)}
-                    className={`px-5 py-2.5 border text-sm transition-colors ${
+                    onClick={() => {
+                      setSelectedVariantId(v.id);
+                      if (v.image?.url) {
+                        const idx = allImages.indexOf(v.image.url);
+                        if (idx !== -1) setCurrentImageIndex(idx);
+                      }
+                    }}
+                    className={`relative group px-5 py-2.5 border text-sm transition-colors ${
                       selectedVariantId === v.id
                         ? "border-primary bg-primary text-primary-foreground"
                         : "border-border text-foreground hover:border-foreground/50"
@@ -143,6 +149,11 @@ function PDP() {
                     disabled={!v.availableForSale}
                   >
                     {v.title}
+                    {!v.availableForSale && (
+                      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max px-2 py-1 text-xs text-white bg-black rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                        Not in stock
+                      </span>
+                    )}
                   </button>
                 ))}
               </div>

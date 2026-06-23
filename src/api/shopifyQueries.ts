@@ -52,6 +52,10 @@ export const getProductsQuery = `
                 id
                 title
                 availableForSale
+                image {
+                  url
+                  altText
+                }
                 price {
                   amount
                   currencyCode
@@ -117,6 +121,10 @@ export const getProductByHandleQuery = `
             id
             title
             availableForSale
+            image {
+              url
+              altText
+            }
             price {
               amount
               currencyCode
