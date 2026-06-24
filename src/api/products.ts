@@ -38,6 +38,13 @@ const mapShopifyProduct = (shopifyProduct: any): Product & { shopifyId: string; 
   if (shopifyProduct.featuredImage?.url && !allImages.includes(shopifyProduct.featuredImage.url)) {
     allImages.unshift(shopifyProduct.featuredImage.url);
   }
+  
+  const mappedVariants = shopifyProduct.variants?.edges?.map((e: any) => e.node) || [];
+  mappedVariants.forEach((v: any) => {
+    if (v.image?.url && !allImages.includes(v.image.url)) {
+      allImages.push(v.image.url);
+    }
+  });
 
   return {
     slug: shopifyProduct.handle,

@@ -28,7 +28,7 @@ export const getProductsQuery = `
             url
             altText
           }
-          images(first: 1) {
+          images(first: 20) {
             edges {
               node {
                 url
@@ -97,7 +97,7 @@ export const getProductByHandleQuery = `
         url
         altText
       }
-      images(first: 5) {
+      images(first: 20) {
         edges {
           node {
             url
