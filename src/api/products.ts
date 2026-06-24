@@ -34,13 +34,24 @@ const mapShopifyProduct = (shopifyProduct: any): Product & { shopifyId: string; 
   const bestseller = tags.includes('bestseller');
   const newArrival = tags.includes('newArrival');
   
-  const allImages = shopifyProduct.images?.edges?.map((e: any) => e.node?.url).filter(Boolean) || [];
+  const allImageNodes = shopifyProduct.images?.edges?.map((e: any) => e.node) || [];
+  const allImages = allImageNodes.map((n: any) => n.url).filter(Boolean);
+  
   if (shopifyProduct.featuredImage?.url && !allImages.includes(shopifyProduct.featuredImage.url)) {
     allImages.unshift(shopifyProduct.featuredImage.url);
   }
   
   const mappedVariants = shopifyProduct.variants?.edges?.map((e: any) => e.node) || [];
   mappedVariants.forEach((v: any) => {
+    if (!v.image?.url) {
+      const matchingImgNode = allImageNodes.find((img: any) => 
+        img.altText && img.altText.toLowerCase().includes(v.title.toLowerCase())
+      );
+      if (matchingImgNode) {
+        v.image = { url: matchingImgNode.url, altText: matchingImgNode.altText };
+      }
+    }
+
     if (v.image?.url && !allImages.includes(v.image.url)) {
       allImages.push(v.image.url);
     }
@@ -62,7 +73,7 @@ const mapShopifyProduct = (shopifyProduct: any): Product & { shopifyId: string; 
     care: shopifyProduct.care?.value || "Dishwasher safe", 
     images: allImages.length > 0 ? allImages : [image, image, image, image],
     shopifyId: shopifyProduct.id,
-    shopifyVariants: shopifyProduct.variants?.edges?.map((e: any) => e.node) || []
+    shopifyVariants: mappedVariants
   };
 };
 

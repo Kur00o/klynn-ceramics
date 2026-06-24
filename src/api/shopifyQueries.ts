@@ -28,7 +28,7 @@ export const getProductsQuery = `
             url
             altText
           }
-          images(first: 20) {
+          images(first: 250) {
             edges {
               node {
                 url
@@ -46,7 +46,7 @@ export const getProductsQuery = `
               }
             }
           }
-          variants(first: 10) {
+          variants(first: 250) {
             edges {
               node {
                 id
@@ -97,7 +97,7 @@ export const getProductByHandleQuery = `
         url
         altText
       }
-      images(first: 20) {
+      images(first: 250) {
         edges {
           node {
             url
@@ -115,7 +115,7 @@ export const getProductByHandleQuery = `
           }
         }
       }
-      variants(first: 10) {
+      variants(first: 250) {
         edges {
           node {
             id
