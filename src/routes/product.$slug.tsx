@@ -145,8 +145,7 @@ function PDP() {
                       selectedVariantId === v.id
                         ? "border-primary bg-primary text-primary-foreground"
                         : "border-border text-foreground hover:border-foreground/50"
-                    } ${!v.availableForSale ? "opacity-50 cursor-not-allowed" : ""}`}
-                    disabled={!v.availableForSale}
+                    } ${!v.availableForSale ? "opacity-50" : ""}`}
                   >
                     {v.title}
                     {!v.availableForSale && (
@@ -162,9 +161,12 @@ function PDP() {
 
           <button 
             onClick={() => add(p, selectedVariantId)} 
-            className="btn-primary mt-8 w-full md:w-auto"
+            className={`btn-primary mt-8 w-full md:w-auto ${
+              selectedVariant && !selectedVariant.availableForSale ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            disabled={selectedVariant && !selectedVariant.availableForSale}
           >
-            Add to cart
+            {selectedVariant && !selectedVariant.availableForSale ? "Out of stock" : "Add to cart"}
           </button>
 
           <div className="mt-12 border-t border-border">
