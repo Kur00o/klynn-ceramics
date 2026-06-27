@@ -16,8 +16,16 @@ export function Header() {
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { count, setOpen: setCartOpen } = useCart();
   const location = useLocation();
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     let last = typeof window !== "undefined" ? window.scrollY : 0;
@@ -33,13 +41,18 @@ export function Header() {
   }, []);
 
   const isDarkHeroPage = location.pathname === "/";
-  const isLight = isDarkHeroPage && !scrolled;
+  // On mobile, the header always has a background, so text should always be dark (not light)
+  const isLight = isDarkHeroPage && !scrolled && !isMobile;
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
         hidden ? "-translate-y-full" : "translate-y-0"
-      } ${scrolled ? "bg-background/85 backdrop-blur-md border-b border-border/60" : "bg-transparent"}`}
+      } ${
+        scrolled || isMobile
+          ? "bg-background/95 backdrop-blur-md border-b border-border/60"
+          : "bg-transparent"
+      }`}
     >
       <div className="container-editorial flex items-center justify-between h-16 md:h-20">
         <Link
@@ -95,7 +108,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-50 bg-background fade-in lg:hidden">
+        <div className="fixed inset-0 z-50 bg-[var(--background)] fade-in lg:hidden">
           <div className="container-editorial flex items-center justify-between h-16">
             <Link to="/" onClick={() => setOpen(false)} className="flex items-center">
               <img src="/logo.png" alt="Klynn" className="h-7 w-auto object-contain" />
@@ -123,3 +136,4 @@ export function Header() {
     </header>
   );
 }
+
