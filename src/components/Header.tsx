@@ -108,7 +108,10 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="fixed inset-0 z-50 bg-[var(--background)] fade-in lg:hidden">
+        <div 
+          className="fixed inset-0 z-50 fade-in lg:hidden"
+          style={{ backgroundColor: "var(--background)", opacity: 1 }}
+        >
           <div className="container-editorial flex items-center justify-between h-16">
             <Link to="/" onClick={() => setOpen(false)} className="flex items-center">
               <img src="/logo.png" alt="Klynn" className="h-7 w-auto object-contain" />
