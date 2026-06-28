@@ -45,73 +45,75 @@ export function Header() {
   const isLight = isDarkHeroPage && !scrolled && !isMobile;
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
-        hidden ? "-translate-y-full" : "translate-y-0"
-      } ${
-        scrolled || isMobile
-          ? "bg-background/95 backdrop-blur-md border-b border-border/60"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="container-editorial flex items-center justify-between h-16 md:h-20">
-        <Link
-          to="/"
-          className={`transition-all duration-300 flex items-center ${
-            isLight ? "brightness-0 invert opacity-90" : "opacity-100"
-          }`}
-        >
-          <img src="/logo.png" alt="Klynn" className="h-7 md:h-8 w-auto object-contain" />
-        </Link>
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-40 transition-all duration-500 ${
+          hidden ? "-translate-y-full" : "translate-y-0"
+        } ${
+          scrolled || isMobile
+            ? "bg-background/95 backdrop-blur-md border-b border-border/60"
+            : "bg-transparent"
+        }`}
+      >
+        <div className="container-editorial flex items-center justify-between h-16 md:h-20">
+          <Link
+            to="/"
+            className={`transition-all duration-300 flex items-center ${
+              isLight ? "brightness-0 invert opacity-90" : "opacity-100"
+            }`}
+          >
+            <img src="/logo.png" alt="Klynn" className="h-7 md:h-8 w-auto object-contain" />
+          </Link>
 
-        <nav className="hidden lg:flex items-center gap-9">
-          {NAV.map((n) => (
-            <Link
-              key={n.to}
-              to={n.to}
-              activeOptions={{ exact: n.to === "/" }}
-              activeProps={{ className: "text-primary underline underline-offset-[6px] decoration-[1.5px]" }}
-              className={`text-[0.78rem] tracking-[0.22em] uppercase transition-colors duration-300 ${
-                isLight ? "text-parchment/80 hover:text-parchment" : "text-foreground/80 hover:text-primary"
+          <nav className="hidden lg:flex items-center gap-9">
+            {NAV.map((n) => (
+              <Link
+                key={n.to}
+                to={n.to}
+                activeOptions={{ exact: n.to === "/" }}
+                activeProps={{ className: "text-primary underline underline-offset-[6px] decoration-[1.5px]" }}
+                className={`text-[0.78rem] tracking-[0.22em] uppercase transition-colors duration-300 ${
+                  isLight ? "text-parchment/80 hover:text-parchment" : "text-foreground/80 hover:text-primary"
+                }`}
+              >
+                {n.label}
+              </Link>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setCartOpen(true)}
+              aria-label="Open cart"
+              className={`relative inline-flex items-center justify-center transition-colors duration-300 ${
+                isLight ? "text-parchment hover:text-parchment/80" : "text-foreground hover:text-primary"
               }`}
             >
-              {n.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setCartOpen(true)}
-            aria-label="Open cart"
-            className={`relative inline-flex items-center justify-center transition-colors duration-300 ${
-              isLight ? "text-parchment hover:text-parchment/80" : "text-foreground hover:text-primary"
-            }`}
-          >
-            <ShoppingBag className="w-5 h-5" strokeWidth={1.4} />
-            {count > 0 && (
-              <span className="absolute -top-1.5 -right-2 text-[10px] bg-primary text-primary-foreground rounded-full w-4 h-4 flex items-center justify-center">
-                {count}
-              </span>
-            )}
-          </button>
-          <button
-            onClick={() => setOpen(true)}
-            aria-label="Open menu"
-            className={`lg:hidden transition-colors duration-300 ${
-              isLight ? "text-parchment hover:text-parchment/80" : "text-foreground hover:text-primary"
-            }`}
-          >
-            <Menu className="w-5 h-5" strokeWidth={1.4} />
-          </button>
+              <ShoppingBag className="w-5 h-5" strokeWidth={1.4} />
+              {count > 0 && (
+                <span className="absolute -top-1.5 -right-2 text-[10px] bg-primary text-primary-foreground rounded-full w-4 h-4 flex items-center justify-center">
+                  {count}
+                </span>
+              )}
+            </button>
+            <button
+              onClick={() => setOpen(true)}
+              aria-label="Open menu"
+              className={`lg:hidden transition-colors duration-300 ${
+                isLight ? "text-parchment hover:text-parchment/80" : "text-foreground hover:text-primary"
+              }`}
+            >
+              <Menu className="w-5 h-5" strokeWidth={1.4} />
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
       {open && (
-        <div className="fixed inset-0 z-50 fade-in lg:hidden bg-[#F8F7F3] dark:bg-[#1A1A1A]">
-          <div className="container-editorial flex items-center justify-between h-16">
+        <div className="fixed inset-0 z-50 fade-in lg:hidden bg-background">
+          <div className="container-editorial flex items-center justify-between h-16 md:h-20">
             <Link to="/" onClick={() => setOpen(false)} className="flex items-center">
-              <img src="/logo.png" alt="Klynn" className="h-7 w-auto object-contain" />
+              <img src="/logo.png" alt="Klynn" className="h-7 md:h-8 w-auto object-contain" />
             </Link>
             <button onClick={() => setOpen(false)} aria-label="Close menu">
               <X className="w-5 h-5" strokeWidth={1.4} />
@@ -133,7 +135,7 @@ export function Header() {
           </nav>
         </div>
       )}
-    </header>
+    </>
   );
 }
 
