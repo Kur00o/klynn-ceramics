@@ -9,32 +9,17 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as PlatesRouteImport } from './routes/plates'
-import { Route as MugsRouteImport } from './routes/mugs'
-import { Route as GiftingSetsRouteImport } from './routes/gifting-sets'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as BowlsRouteImport } from './routes/bowls'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BowlsRouteImport } from './routes/bowls'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GiftingSetsRouteImport } from './routes/gifting-sets'
+import { Route as MugsRouteImport } from './routes/mugs'
+import { Route as PlatesRouteImport } from './routes/plates'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 
-const PlatesRoute = PlatesRouteImport.update({
-  id: '/plates',
-  path: '/plates',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MugsRoute = MugsRouteImport.update({
-  id: '/mugs',
-  path: '/mugs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GiftingSetsRoute = GiftingSetsRouteImport.update({
-  id: '/gifting-sets',
-  path: '/gifting-sets',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BowlsRoute = BowlsRouteImport.update({
@@ -42,9 +27,24 @@ const BowlsRoute = BowlsRouteImport.update({
   path: '/bowls',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GiftingSetsRoute = GiftingSetsRouteImport.update({
+  id: '/gifting-sets',
+  path: '/gifting-sets',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MugsRoute = MugsRouteImport.update({
+  id: '/mugs',
+  path: '/mugs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlatesRoute = PlatesRouteImport.update({
+  id: '/plates',
+  path: '/plates',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductSlugRoute = ProductSlugRouteImport.update({
@@ -123,32 +123,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/plates': {
-      id: '/plates'
-      path: '/plates'
-      fullPath: '/plates'
-      preLoaderRoute: typeof PlatesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mugs': {
-      id: '/mugs'
-      path: '/mugs'
-      fullPath: '/mugs'
-      preLoaderRoute: typeof MugsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/gifting-sets': {
-      id: '/gifting-sets'
-      path: '/gifting-sets'
-      fullPath: '/gifting-sets'
-      preLoaderRoute: typeof GiftingSetsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bowls': {
@@ -158,11 +137,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BowlsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gifting-sets': {
+      id: '/gifting-sets'
+      path: '/gifting-sets'
+      fullPath: '/gifting-sets'
+      preLoaderRoute: typeof GiftingSetsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mugs': {
+      id: '/mugs'
+      path: '/mugs'
+      fullPath: '/mugs'
+      preLoaderRoute: typeof MugsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plates': {
+      id: '/plates'
+      path: '/plates'
+      fullPath: '/plates'
+      preLoaderRoute: typeof PlatesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/product/$slug': {
